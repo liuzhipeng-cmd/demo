@@ -9,9 +9,14 @@ import java.io.Serializable;
 public class UserPojo extends Base {
 
     /**
-     * 用户名
+     * 账号
      */
     private String userName;
+
+    /**
+     * 真实姓名
+     */
+    private String realName;
 
     /**
      * 密码
