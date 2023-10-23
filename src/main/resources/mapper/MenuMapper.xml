@@ -57,8 +57,8 @@
     <!--子节点查询全部数据-->
     <select id="listMenuInfoChildPage" resultType="com.example.demo.pojo.MenuPojo">
         SELECT
-        m.id,m.menu_name,m.menu_type,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator,u.user_name
-        AS creatorName,ui.user_name AS updatorName FROM menu_info m LEFT JOIN user_info u ON m.creator=u.id LEFT JOIN
+        m.id,m.menu_name,m.menu_type,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator,u.real_name
+        AS creatorName,ui.real_name AS updatorName FROM menu_info m LEFT JOIN user_info u ON m.creator=u.id LEFT JOIN
         user_info ui ON m.updator=ui.id WHERE m.is_del=0 and m.pid = #{pid}
         <if test="menuName != null and menuName != ''">
             and m.menu_name LIKE '%${menuName}%'
