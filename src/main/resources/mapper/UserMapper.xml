@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao">
+    <!--根据账号查询数据-->
+    <select id="getUser" resultType="com.example.demo.pojo.UserPojo">
+        select * from user_info where user_name = #{userName}
+    </select>
+</mapper>

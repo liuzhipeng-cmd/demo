@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.MenuDao">
+    <!--查询全部数据-->
+    <select id="listMenuInfoPage" resultType="com.example.demo.pojo.MenuPojo">
+        SELECT
+        m.id,m.menu_name,m.menu_type,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator,u.user_name
+        AS creatorName,ui.user_name AS updatorName FROM menu_info m LEFT JOIN user_info u ON m.creator=u.id LEFT JOIN
+        user_info ui ON m.updator=ui.id WHERE m.is_del=0 and m.pid is null
+        <if test="menuName != null and menuName != ''">
+            and m.menu_name LIKE '%${menuName}%'
+        </if>
+        <if test="menuType != -1">
+            and m.menu_type = #{menuType}
+        </if>
+        <if test="menuStatus != -1">
+            and m.menu_status = #{menuStatus}
+        </if>
+        ORDER BY m.menu_order ASC
+    </select>
+
+    <!--插入数据-->
+    <insert id="saveDataMenu" parameterType="com.example.demo.pojo.MenuPojo">
+        INSERT INTO menu_info(id, menu_name, menu_type, menu_action, is_child_node, create_time, menu_order,
+                              menu_remarks, creator, pid)
+        VALUES (#{id}, #{menuName}, #{menuType}, #{menuAction}, #{isChildNode}, #{createTime}, #{menuOrder},
+                #{menuRemarks}, #{creator}, #{pid})
+    </insert>
+
+    <!--更新数据-->
+    <update id="updateDataMenu" parameterType="com.example.demo.pojo.MenuPojo">
+        UPDATE menu_info
+        SET menu_name    = #{menuName},
+            menu_action  = #{menuAction},
+            menu_order   = #{menuOrder},
+            menu_remarks = #{menuRemarks},
+            update_time  = #{updateTime},
+            updator      = #{updator}
+        WHERE id = #{id}
+    </update>
+
+    <!--更新菜单状态-->
+    <update id="updateMenuStatus">
+        UPDATE menu_info
+        SET menu_status = #{type}
+        where id = #{id}
+    </update>
+
+    <!--删除数据-->
+    <update id="deleteMenu">
+        UPDATE menu_info
+        SET is_del = '1'
+        where id = #{id}
+    </update>
+
+    <!--子节点查询全部数据-->
+    <select id="listMenuInfoChildPage" resultType="com.example.demo.pojo.MenuPojo">
+        SELECT
+        m.id,m.menu_name,m.menu_type,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator,u.user_name
+        AS creatorName,ui.user_name AS updatorName FROM menu_info m LEFT JOIN user_info u ON m.creator=u.id LEFT JOIN
+        user_info ui ON m.updator=ui.id WHERE m.is_del=0 and m.pid = #{pid}
+        <if test="menuName != null and menuName != ''">
+            and m.menu_name LIKE '%${menuName}%'
+        </if>
+        <if test="menuType != -1">
+            and m.menu_type = #{menuType}
+        </if>
+        <if test="menuStatus != -1">
+            and m.menu_status = #{menuStatus}
+        </if>
+        ORDER BY m.menu_order ASC
+    </select>
+
+    <!--获取主菜单-->
+    <select id="getHomeMenuList" resultType="java.util.HashMap">
+        SELECT id,menu_name,menu_action,is_child_node FROM menu_info WHERE is_del = 0 AND pid is NULL ORDER BY menu_order ASC
+    </select>
+
+    <!--通过主菜单id查询对应的子菜单-->
+    <select id="getChildMenuList" resultType="java.util.HashMap">
+        SELECT id,menu_name,menu_action FROM menu_info WHERE is_del = 0 AND pid = #{pid} ORDER BY menu_order ASC
+    </select>
+</mapper>
