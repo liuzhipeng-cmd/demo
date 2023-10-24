@@ -2,15 +2,18 @@ package com.example.demo.controller;
 
 import com.example.common.utils.Result;
 import com.example.demo.pojo.UserPojo;
+import com.example.demo.service.RoleService;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,9 +25,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/user")
-    public String jumpUser() {
+    @Autowired
+    RoleService roleService;
 
+    @RequestMapping("/user")
+    public String jumpUser(ModelMap model) {
+        // 查询所有的角色id与name
+        List<Map<String, Object>> roleList = roleService.listRoleIdAndName();
+        model.addAttribute("roleList", roleList);
         return "system/user";
     }
 

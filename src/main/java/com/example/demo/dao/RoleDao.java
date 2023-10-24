@@ -4,6 +4,7 @@ import com.example.demo.pojo.RolePojo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface RoleDao {
@@ -39,4 +40,11 @@ public interface RoleDao {
      * @return
      */
     Integer saveDataRole(RolePojo pojo);
+
+    /**
+     * 查询所有的角色id与name
+     *
+     * @return
+     */
+    List<Map<String, Object>> listRoleIdAndName();
 }

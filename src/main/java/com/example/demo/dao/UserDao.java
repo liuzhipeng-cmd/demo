@@ -67,4 +67,12 @@ public interface UserDao {
      * @return
      */
     Integer saveUserRole(UserRolePojo userRole);
+
+    /**
+     * 将用户与角色关联表的数据更新通过用户id
+     *
+     * @param userRole
+     * @return
+     */
+    Integer updateUserRole(UserRolePojo userRole);
 }

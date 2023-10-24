@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
         int num = userDao.saveDataUser(pojo);
 
         if (num > 0) {
+            // 将角色id与用户id保存到用户与角色关联表
             num = saveUserRole(pojo);
         }
 
@@ -121,11 +122,14 @@ public class UserServiceImpl implements UserService {
         pojo.setUpdator(userPojo.getId());
         // 更新数据
         Integer num = userDao.updateDataUser(pojo);
+        if (num > 0) {
+           num = updateDataUserRole(pojo);
+        }
         return num;
     }
 
     /**
-     * 将数据保存到用户与角色关联表
+     * 将角色id与用户id保存到用户与角色关联表
      *
      * @param pojo
      * @return
@@ -140,6 +144,24 @@ public class UserServiceImpl implements UserService {
         // 创建人
         userRole.setCreator(pojo.getCreator());
         int num = userDao.saveUserRole(userRole);
+        return num;
+    }
+
+    /**
+     * 将用户与角色关联表的数据更新通过用户id
+     * @param pojo
+     * @return
+     */
+    private int updateDataUserRole (UserPojo pojo) {
+        UserRolePojo userRole = new UserRolePojo();
+        // 拼接参数
+        userRole.setRoleId(pojo.getRoleId());// 角色id
+        userRole.setUserId(pojo.getId());// 用户id
+        // 获取当前时间（日期+时分秒）
+        userRole.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
+        // 更新人
+        userRole.setUpdator(pojo.getUpdator());
+        int num = userDao.updateUserRole(userRole);
         return num;
     }
 }

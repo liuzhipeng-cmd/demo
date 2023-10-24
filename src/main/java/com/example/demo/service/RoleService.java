@@ -4,6 +4,8 @@ import com.example.demo.pojo.RolePojo;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 public interface RoleService {
 
@@ -40,4 +42,12 @@ public interface RoleService {
      * @return
      */
     int saveDataRole(HttpServletRequest request, RolePojo pojo);
+
+    /**
+     * 查询所有的角色id与name
+     *
+     * @return
+     */
+    List<Map<String, Object>> listRoleIdAndName();
+
 }

@@ -89,6 +89,9 @@
             <div class="layui-input-block">
                 <select id="roleIdSave" name="roleIdSave">
                     <option value="-1">请选择</option>
+                    <c:forEach var="item" items="${roleList}">
+                        <option value="${item.id}">${item.roleName}</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -139,6 +142,9 @@
             <div class="layui-input-block">
                 <select id="roleIdUpdate" name="roleIdUpdate">
                     <option value="-1">请选择</option>
+                    <c:forEach var="item" items="${roleList}">
+                        <option value="${item.id}">${item.roleName}</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -237,6 +243,7 @@
                             var userPhoneUpdate = $('#userPhoneUpdate').val();
                             var remarkUpdate = $('#remarkUpdate').val();
                             var roleIdUpdate = $('#roleIdUpdate').val();
+                            console.log(roleIdUpdate);
                             // 字段校验
                             var validation = formValidation(userNameUpdate, "null", "null", realNameUpdate);
                             if (!validation) {
@@ -342,6 +349,7 @@
         $('#userBirthdaySave').val('');
         $('#userPhoneSave').val('');
         $('#remarkSave').val('');
+        $('#roleIdSave').val('');
     }
 
     // 校验参数
@@ -405,6 +413,7 @@
         $('#userBirthdayUpdate').val(obj.data.userBirthday);
         $('#userPhoneUpdate').val(obj.data.userPhone);
         $('#remarkUpdate').val(obj.data.remark);
+        $('#roleIdUpdate').val(obj.data.roleId);
 
         form.render(); //更新全部
     }

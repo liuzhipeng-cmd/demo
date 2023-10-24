@@ -62,4 +62,9 @@ public class UserPojo extends Base {
      * 角色id
      */
     private String roleId;
+
+    /**
+     * 角色名称
+     */
+    private String roleName;
 }

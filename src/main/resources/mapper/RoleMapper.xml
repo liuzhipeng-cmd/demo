@@ -38,4 +38,9 @@
         INSERT INTO role_info(id,role_name,remarks,create_time,creator) VALUES (#{id},#{roleName},#{remarks},#{createTime},#{creator})
     </insert>
 
+    <!--查询所有的角色id与name-->
+    <select id="listRoleIdAndName" resultType="java.util.HashMap">
+        SELECT id,role_name as roleName FROM role_info WHERE is_del = 0
+    </select>
+
 </mapper>

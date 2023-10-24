@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -91,5 +92,18 @@ public class RoleServiceImpl implements RoleService {
         Integer num = roleDao.saveDataRole(pojo);
 
         return num;
+    }
+
+    /**
+     * 查询所有的角色id与name
+     *
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> listRoleIdAndName() {
+
+        List<Map<String, Object>> list = roleDao.listRoleIdAndName();
+
+        return list;
     }
 }
