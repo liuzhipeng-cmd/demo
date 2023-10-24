@@ -75,4 +75,12 @@ public interface UserDao {
      * @return
      */
     Integer updateUserRole(UserRolePojo userRole);
+
+    /**
+     * 通过用户id删除用户与角色关联表信息
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteUserRole(String id);
 }

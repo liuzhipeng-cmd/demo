@@ -43,4 +43,8 @@
         SELECT id,role_name as roleName FROM role_info WHERE is_del = 0
     </select>
 
+    <!--通过角色id删除用户与角色关联表信息-->
+    <update id="deleteUserRole">
+        UPDATE user_role SET is_del = 1 WHERE role_id = #{id}
+    </update>
 </mapper>

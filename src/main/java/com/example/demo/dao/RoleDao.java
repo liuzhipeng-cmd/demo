@@ -47,4 +47,12 @@ public interface RoleDao {
      * @return
      */
     List<Map<String, Object>> listRoleIdAndName();
+
+    /**
+     * 通过角色id删除用户与角色关联表信息
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteUserRole(String id);
 }

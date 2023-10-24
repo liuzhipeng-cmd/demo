@@ -49,6 +49,9 @@ public class RoleServiceImpl implements RoleService {
     public int deleteRole(String id) {
 
         int num = roleDao.deleteRole(id);
+        if (num > 0) {
+           num = deleteUserRole(id);
+        }
 
         return num;
     }
@@ -105,5 +108,16 @@ public class RoleServiceImpl implements RoleService {
         List<Map<String, Object>> list = roleDao.listRoleIdAndName();
 
         return list;
+    }
+
+    /**
+     * 通过角色id删除用户与角色关联表信息
+     * @return
+     */
+    private int deleteUserRole (String id) {
+
+        int num = roleDao.deleteUserRole(id);
+
+        return num;
     }
 }

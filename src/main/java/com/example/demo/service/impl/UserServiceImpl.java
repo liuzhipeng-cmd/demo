@@ -104,6 +104,10 @@ public class UserServiceImpl implements UserService {
 
         int num = userDao.deleteUser(id);
 
+        if (num > 0) {
+            deleteUserRole(id);
+        }
+
         return num;
     }
 
@@ -123,7 +127,7 @@ public class UserServiceImpl implements UserService {
         // 更新数据
         Integer num = userDao.updateDataUser(pojo);
         if (num > 0) {
-           num = updateDataUserRole(pojo);
+            num = updateDataUserRole(pojo);
         }
         return num;
     }
@@ -149,10 +153,11 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 将用户与角色关联表的数据更新通过用户id
+     *
      * @param pojo
      * @return
      */
-    private int updateDataUserRole (UserPojo pojo) {
+    private int updateDataUserRole(UserPojo pojo) {
         UserRolePojo userRole = new UserRolePojo();
         // 拼接参数
         userRole.setRoleId(pojo.getRoleId());// 角色id
@@ -162,6 +167,18 @@ public class UserServiceImpl implements UserService {
         // 更新人
         userRole.setUpdator(pojo.getUpdator());
         int num = userDao.updateUserRole(userRole);
+        return num;
+    }
+
+    /**
+     * 通过用户id删除用户与角色关联表信息
+     *
+     * @return
+     */
+    private int deleteUserRole(String id) {
+
+        int num = userDao.deleteUserRole(id);
+
         return num;
     }
 }
