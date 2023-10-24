@@ -230,6 +230,7 @@
                         btn: ['确定', '取消'],
                         btnAlign: 'c',
                         btn1: function (index) {
+                            var updateId = $('#updateId').val();
                             var userNameUpdate = $('#userNameUpdate').val();
                             var realNameUpdate = $('#realNameUpdate').val();
                             var userBirthdayUpdate = $('#userBirthdayUpdate').val();
