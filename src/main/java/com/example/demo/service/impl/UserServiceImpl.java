@@ -1,11 +1,18 @@
 package com.example.demo.service.impl;
 
+import com.example.common.utils.DateTimeUtils;
+import com.example.common.utils.GuidUtils;
 import com.example.demo.dao.UserDao;
 import com.example.demo.pojo.UserPojo;
+import com.example.demo.pojo.UserRolePojo;
 import com.example.demo.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,5 +32,114 @@ public class UserServiceImpl implements UserService {
         UserPojo user = userDao.getUser(userName);
 
         return user;
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param pojo
+     * @return
+     */
+    @Override
+    public PageInfo<UserPojo> listUserInfoPage(UserPojo pojo) {
+
+        PageHelper.startPage(pojo.getPage(), pojo.getLimit());
+
+        List<UserPojo> list = userDao.listUserInfoPage(pojo);
+
+        PageInfo<UserPojo> pageInfo = new PageInfo<>(list);
+
+        return pageInfo;
+    }
+
+    /**
+     * 保存数据
+     *
+     * @param pojo
+     * @return
+     */
+    @Override
+    public int saveDataUser(HttpServletRequest request, UserPojo pojo) {
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        // 创建主键
+        pojo.setId(new GuidUtils().GuidUtils());
+        // 获取当前时间（日期+时分秒）
+        pojo.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
+        // 创建人
+        pojo.setCreator(userPojo.getId());
+
+        int num = userDao.saveDataUser(pojo);
+
+        if (num > 0) {
+            num = saveUserRole(pojo);
+        }
+
+        return num;
+    }
+
+    /**
+     * 更新账号状态
+     *
+     * @param id
+     * @param type
+     * @return
+     */
+    @Override
+    public int updateUserStatus(String id, String type) {
+
+        int num = userDao.updateUserStatus(id, type);
+
+        return num;
+    }
+
+    /**
+     * 删除数据
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public int deleteUser(String id) {
+
+        int num = userDao.deleteUser(id);
+
+        return num;
+    }
+
+    /**
+     * 更新数据
+     *
+     * @param pojo
+     * @return
+     */
+    @Override
+    public int updateDataUser(HttpServletRequest request, UserPojo pojo) {
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        // 获取当前时间（日期+时分秒）
+        pojo.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
+        // 更新人
+        pojo.setUpdator(userPojo.getId());
+        // 更新数据
+        Integer num = userDao.updateDataUser(pojo);
+        return num;
+    }
+
+    /**
+     * 将数据保存到用户与角色关联表
+     *
+     * @param pojo
+     * @return
+     */
+    private int saveUserRole(UserPojo pojo) {
+        UserRolePojo userRole = new UserRolePojo();
+        // 拼接参数
+        userRole.setRoleId(pojo.getRoleId());// 角色id
+        userRole.setUserId(pojo.getId());// 用户id
+        // 获取当前时间（日期+时分秒）
+        userRole.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
+        // 创建人
+        userRole.setCreator(pojo.getCreator());
+        int num = userDao.saveUserRole(userRole);
+        return num;
     }
 }

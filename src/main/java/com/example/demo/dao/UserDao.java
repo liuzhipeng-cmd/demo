@@ -2,7 +2,11 @@ package com.example.demo.dao;
 
 
 import com.example.demo.pojo.UserPojo;
+import com.example.demo.pojo.UserRolePojo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserDao {
@@ -14,4 +18,53 @@ public interface UserDao {
      * @return
      */
     UserPojo getUser(String userName);
+
+    /**
+     * 查询所有数据
+     *
+     * @param pojo
+     * @return
+     */
+    List<UserPojo> listUserInfoPage(UserPojo pojo);
+
+    /**
+     * 保存数据
+     *
+     * @param pojo
+     * @return
+     */
+    Integer saveDataUser(UserPojo pojo);
+
+    /**
+     * 更新账号状态
+     *
+     * @param id
+     * @param type
+     * @return
+     */
+    Integer updateUserStatus(@Param("id") String id, @Param("type") String type);
+
+    /**
+     * 删除数据
+     *
+     * @param id
+     * @return
+     */
+    int deleteUser(String id);
+
+    /**
+     * 更新数据
+     *
+     * @param pojo
+     * @return
+     */
+    Integer updateDataUser(UserPojo pojo);
+
+    /**
+     * 将数据保存到用户与角色关联表
+     *
+     * @param userRole
+     * @return
+     */
+    Integer saveUserRole(UserRolePojo userRole);
 }

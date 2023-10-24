@@ -60,13 +60,6 @@ public class MenuController {
     @RequestMapping(value = "/saveDataMenu", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> saveDataMenu(HttpServletRequest request, MenuPojo pojo) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
-        // 创建主键
-        pojo.setId(new GuidUtils().GuidUtils());
-        // 获取当前时间（日期+时分秒）
-        pojo.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
-        // 创建人
-        pojo.setCreator(userPojo.getId());
 
         int num = menuService.saveDataMenu(request, pojo);
 

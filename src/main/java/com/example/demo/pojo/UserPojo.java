@@ -57,4 +57,9 @@ public class UserPojo extends Base {
      * 验证码
      */
     private String verificationCode;
+
+    /**
+     * 角色id
+     */
+    private String roleId;
 }

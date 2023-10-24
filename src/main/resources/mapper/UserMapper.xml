@@ -4,6 +4,54 @@
 <mapper namespace="com.example.demo.dao.UserDao">
     <!--根据账号查询数据-->
     <select id="getUser" resultType="com.example.demo.pojo.UserPojo">
-        select * from user_info where user_name = #{userName}
+        select *
+        from user_info
+        where user_name = #{userName}
     </select>
+
+    <!--查询全部数据-->
+    <select id="listUserInfoPage" resultType="com.example.demo.pojo.UserPojo">
+        SELECT
+        id,user_name,real_name,user_password,user_birthday,user_phone,is_lock,password_times,multi_tenant_id,create_time,update_time,is_del,remark,creator,updator
+        FROM user_info WHERE is_del=0
+        <if test="realName != null and realName != ''">
+            and real_name LIKE '%${realName}%'
+        </if>
+        <if test="userName != null and userName != ''">
+            and user_name LIKE '%${userName}%'
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+    <!--保存数据-->
+    <insert id="saveDataUser" parameterType="com.example.demo.pojo.UserPojo">
+        INSERT INTO user_info(id, user_name, real_name, user_password, user_birthday, user_phone, password_times,
+                              create_time, remark, creator)
+        VALUES (#{id}, #{userName}, #{realName}, #{userPassword}, #{userBirthday}, #{userPhone}, 3, #{createTime},
+                #{remark}, #{creator})
+    </insert>
+
+    <!--更新账号状态-->
+    <update id="updateUserStatus">
+        UPDATE user_info
+        SET is_lock = #{type}
+        WHERE id = #{id}
+    </update>
+
+    <!--删除数据-->
+    <update id="deleteUser">
+        UPDATE user_info
+        SET is_del = 1
+        WHERE id = #{id}
+    </update>
+
+    <!--更新数据-->
+    <update id="updateDataUser" parameterType="com.example.demo.pojo.UserPojo">
+        UPDATE user_info SET user_name = #{userName},real_name = #{realName},user_birthday = #{userBirthday},user_phone = #{userPhone},remark = #{remark},update_time = #{updateTime},updator = #{updator} WHERE id = #{id}
+    </update>
+
+    <!--将数据保存到用户与角色关联表-->
+    <insert id="saveUserRole" parameterType="com.example.demo.pojo.UserRolePojo">
+        INSERT INTO user_role(role_id,user_id,create_time,creator) VALUES (#{roleId},#{userId},#{createTime},#{creator})
+    </insert>
 </mapper>
