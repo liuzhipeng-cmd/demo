@@ -191,12 +191,11 @@
                     , {field: 'realName', title: '真实姓名', width: 120, align: "center"}
                     , {field: 'userBirthday', title: '生日', width: 120, align: "center"}
                     , {field: 'userPhone', title: '手机号', width: 120, align: "center"}
-                    , {field: 'creatorName', title: '创建人', width: 120, align: "center"}
-                    , {field: 'createTime', title: '创建时间', width: 200, align: "center"}
-                    , {field: 'updatorName', title: '更新人', width: 120, align: "center"}
-                    , {field: 'updateTime', title: '更新时间', width: 120, align: "center"}
+                    , {field: 'roleName', title: '角色名称', width: 120, align: "center"}
+                    , {field: 'createTime', title: '创建时间', width: 180, align: "center"}
+                    , {field: 'updateTime', title: '更新时间', width: 180, align: "center"}
                     , {field: 'remark', title: '备注', width: 120, align: "center"}
-                    , {field: 'isLock', title: '是否锁定', width: 120, align: "center", templet: function (d) {
+                    , {field: 'isLock', title: '是否锁定', width: 100, align: "center", templet: function (d) {
                             if (d.isLock == 0) {
                                 return '<a style="color: red" onclick="statusOpenClose(\'' + d.id + '\',1)">锁定</a>'
                             } else {

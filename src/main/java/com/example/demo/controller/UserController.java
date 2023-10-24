@@ -1,12 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.common.utils.DateTimeUtils;
-import com.example.common.utils.GuidUtils;
 import com.example.common.utils.Result;
 import com.example.demo.pojo.UserPojo;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.bcel.internal.generic.PUSH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +25,7 @@ public class UserController {
     @RequestMapping("/user")
     public String jumpUser() {
 
-        return "user";
+        return "system/user";
     }
 
     /**

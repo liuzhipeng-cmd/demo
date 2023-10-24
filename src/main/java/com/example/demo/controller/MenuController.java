@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.common.utils.DateTimeUtils;
-import com.example.common.utils.GuidUtils;
 import com.example.common.utils.Result;
 import com.example.demo.pojo.MenuPojo;
-import com.example.demo.pojo.UserPojo;
 import com.example.demo.service.MenuService;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,7 +30,7 @@ public class MenuController {
     @RequestMapping("/menu")
     public String jumpMenu(ModelMap model) {
 
-        return "menu";
+        return "system/menu";
     }
 
     /**
@@ -124,7 +120,7 @@ public class MenuController {
     @RequestMapping("/menuChild")
     public String jumpMenuChild(ModelMap model, String pid) {
         model.addAttribute("menuPid", pid);
-        return "menu-child";
+        return "system/menu-child";
     }
 
     /**
