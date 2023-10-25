@@ -45,6 +45,24 @@
                           class="layui-textarea"></textarea>
             </div>
         </div>
+        <%--菜单列表--%>
+        <div>
+            <hr>
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>菜单列表</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="width: 50%">
+                        <div id="menuTree"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </form>
 </div>
 
@@ -55,7 +73,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色名称</label>
             <div class="layui-input-block">
-                <input type="text" id="roleNameUpdate" name="roleNameUpdate" placeholder="请输入角色名称" autocomplete="off"
+                <input type="text" id="roleNameUpdate" name="roleNameUpdate" placeholder="请输入角色名称"
+                       autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -77,8 +96,11 @@
     var table;
     var form;
     var laydate;
+    var tree;
+    var menuList;
     $(function () {
-        dataList();
+        dataList(); // 加载表格数据
+        getMenuTreeData(); // 获得菜单树的数据
     })
 
     //  点击查询数据
@@ -88,10 +110,11 @@
 
     // 查询主数据
     function dataList() {
-        layui.use(['table', 'form','laydate'], function () {
+        layui.use(['table', 'form', 'laydate', 'tree'], function () {
             table = layui.table;
             form = layui.form;
             laydate = layui.laydate;
+            tree = layui.tree;
             //第一个实例
             table.render({
                 elem: '#roleTable'
@@ -182,6 +205,7 @@
             btn1: function (index) {
                 var roleNameSave = $('#roleNameSave').val();
                 var remarksSave = $('#remarksSave').val();
+                var menuTreeData = tree.getChecked('menuTreeData');
                 // 字段校验
                 var validation = formValidation(roleNameSave);
                 if (!validation) {
@@ -190,7 +214,8 @@
                         method: 'post',
                         data: {
                             roleName: roleNameSave,
-                            remarks: remarksSave
+                            remarks: remarksSave,
+                            menuTreeData: JSON.stringify(menuTreeData)
                         },
                         success: function (res) {
                             if (res.code == 200) {
@@ -205,6 +230,13 @@
                 }
             }
         });
+        // 加载菜单列表
+        var inst1 = tree.render({
+            elem: '#menuTree'  //绑定元素
+            , showCheckbox: true // 是否显示复选框
+            , id: 'menuTreeData' // 是否显示复选框
+            , data: menuList
+        });
     }
 
     // 新增数据时清空表单数据
@@ -214,7 +246,7 @@
     }
 
     // 校验参数
-    function formValidation (roleName) {
+    function formValidation(roleName) {
         var flag = false;
         if (!roleName) { // 角色名称
             flag = true;
@@ -232,6 +264,17 @@
         $('#remarksUpdate').val(obj.data.remarks);
 
         form.render(); //更新全部
+    }
+
+    // 获得菜单树的数据
+    function getMenuTreeData() {
+        $.ajax({
+            url: ctx + '/menuTreeData',
+            method: 'get',
+            success: function (res) {
+                menuList = res;
+            }
+        });
     }
 </script>
 </body>

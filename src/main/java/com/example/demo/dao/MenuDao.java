@@ -73,4 +73,19 @@ public interface MenuDao {
      * @return
      */
     List<Map<String, Object>> getChildMenuList(String pid);
+
+    /**
+     * 获取主菜单
+     *
+     * @return
+     */
+    List<Map<String, Object>> getHomeMenuRoleList();
+
+    /**
+     * 通过主菜单id查询对应的子菜单
+     *
+     * @param pid
+     * @return
+     */
+    List<Map<String, Object>> getChildMenuRoleList(String pid);
 }

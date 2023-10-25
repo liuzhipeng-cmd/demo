@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.pojo.RoleMenuPojo;
 import com.example.demo.pojo.RolePojo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -55,4 +56,11 @@ public interface RoleDao {
      * @return
      */
     Integer deleteUserRole(String id);
+
+    /**
+     * 将角色id与菜单id保存到数据库中
+     *
+     * @param roleMenuPojo
+     */
+    Integer saveRoleMenu(RoleMenuPojo roleMenuPojo);
 }

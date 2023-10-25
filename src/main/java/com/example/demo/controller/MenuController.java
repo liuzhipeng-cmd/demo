@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -136,5 +137,19 @@ public class MenuController {
         PageInfo<MenuPojo> page = menuService.listMenuInfoChildPage(pojo);
 
         return new Result().Success(page.getTotal(), page.getList());
+    }
+
+    /**
+     * 获取菜单
+     *
+     * @return
+     */
+    @RequestMapping("/menuTreeData")
+    @ResponseBody
+    public List<Map<String, Object>> menuTreeData() {
+
+        List<Map<String, Object>> menuList = menuService.getMenuRoleList();
+
+        return menuList;
     }
 }

@@ -1,13 +1,12 @@
 package com.example.common.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.pojo.UserPojo;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 获取id
@@ -77,5 +76,21 @@ public class GuidUtils {
         Map<String, Object> map = new HashMap<>();
         map = JSONObject.parseObject(JSONObject.toJSONString(object), Map.class);
         return map;
+    }
+
+    /**
+     * 字符串转list map
+     * @return
+     */
+    public List<Map<String,Object>> stringToListMap(String data) {
+        List<Map<String,Object>> list = new ArrayList<>();
+        if (!StringUtils.isEmpty(data)) {
+            JSONArray objects = JSON.parseArray(data);
+            for (Object object : objects) {
+                Map<String, Object> map = (Map<String, Object>) object;
+                list.add(map);
+            }
+        }
+        return list;
     }
 }

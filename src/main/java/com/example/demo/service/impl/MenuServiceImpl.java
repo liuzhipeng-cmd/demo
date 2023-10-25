@@ -149,4 +149,26 @@ public class MenuServiceImpl implements MenuService {
 
         return list;
     }
+
+    /**
+     * 获取菜单(角色模块)
+     *
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> getMenuRoleList() {
+        // 获取主菜单
+        List<Map<String, Object>> list = menuDao.getHomeMenuRoleList();
+        // 判断主菜单是否有值
+        if (!CollectionUtils.isEmpty(list)) {
+            for (int i = 0; i < list.size(); i++) {
+                String pid = String.valueOf(list.get(i).get("id"));
+                // 通过主菜单id查询对应的子菜单
+                List<Map<String, Object>> childList = menuDao.getChildMenuRoleList(pid);
+                list.get(i).put("children", childList);
+            }
+        }
+
+        return list;
+    }
 }

@@ -45,6 +45,13 @@
 
     <!--通过角色id删除用户与角色关联表信息-->
     <update id="deleteUserRole">
-        UPDATE user_role SET is_del = 1 WHERE role_id = #{id}
+        UPDATE user_role
+        SET is_del = 1
+        WHERE role_id = #{id}
     </update>
+
+    <!---->
+    <insert id="saveRoleMenu" parameterType="com.example.demo.pojo.RoleMenuPojo">
+        INSERT INTO role_menu(role_id,menu_id,create_time,creator) VALUES (#{roleId},#{menuId},#{createTime},#{creator})
+    </insert>
 </mapper>

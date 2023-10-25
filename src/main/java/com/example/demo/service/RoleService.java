@@ -41,7 +41,7 @@ public interface RoleService {
      * @param pojo
      * @return
      */
-    int saveDataRole(HttpServletRequest request, RolePojo pojo);
+    int saveDataRole(HttpServletRequest request, RolePojo pojo, String menuTreeData);
 
     /**
      * 查询所有的角色id与name

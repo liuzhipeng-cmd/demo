@@ -1,16 +1,22 @@
 package com.example.demo.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.example.common.utils.GuidUtils;
 import com.example.common.utils.Result;
 import com.example.demo.pojo.RolePojo;
 import com.example.demo.service.RoleService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -88,7 +94,9 @@ public class RoleController {
     @ResponseBody
     public Map<String, Object> saveDataRole(HttpServletRequest request, RolePojo pojo) {
 
-        int num = roleService.saveDataRole(request, pojo);
+        String menuTreeData = request.getParameter("menuTreeData");
+
+        int num = roleService.saveDataRole(request, pojo, menuTreeData);
 
         if (num > 0) {
             return new Result().success(null);
