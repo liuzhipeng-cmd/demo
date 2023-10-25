@@ -137,7 +137,7 @@
             //第一个实例
             table.render({
                 elem: '#roleTable'
-                , height: 500
+                , height: 550
                 , url: '${ctx}/listRoleInfoPage' //数据接口
                 , where: {
                     roleName: $('#roleName').val()

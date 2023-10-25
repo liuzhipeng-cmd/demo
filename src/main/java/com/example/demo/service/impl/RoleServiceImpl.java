@@ -196,6 +196,8 @@ public class RoleServiceImpl implements RoleService {
                     }
                 }
             }
+        } else {
+            num = 1;
         }
         return num;
     }

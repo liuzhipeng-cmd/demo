@@ -184,7 +184,7 @@
             //第一个实例
             table.render({
                 elem: '#userTable'
-                , height: 500
+                , height: 550
                 , url: '${ctx}/listUserInfoPage' //数据接口
                 , where: {
                     realName: $('#realName').val(),

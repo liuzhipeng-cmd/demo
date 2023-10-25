@@ -162,7 +162,7 @@
             //第一个实例
             table.render({
                 elem: '#menuTable'
-                , height: 500
+                , height: 550
                 , url: '${ctx}/listMenuInfoChildPage' //数据接口
                 , where: {
                     menuName: $('#menuName').val(),
