@@ -63,4 +63,19 @@ public interface RoleDao {
      * @param roleMenuPojo
      */
     Integer saveRoleMenu(RoleMenuPojo roleMenuPojo);
+
+    /**
+     * 通过角色id查询菜单id
+     *
+     * @param roleId
+     * @return
+     */
+    List<Integer> listRoleMenuId(String roleId);
+
+    /**
+     * 通过角色id清空之前的配置的菜单
+     *
+     * @param roleId
+     */
+    void deleteRoleMenu(String roleId);
 }

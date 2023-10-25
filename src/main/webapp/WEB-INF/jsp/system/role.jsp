@@ -85,6 +85,24 @@
                           class="layui-textarea"></textarea>
             </div>
         </div>
+        <%--菜单列表--%>
+        <div>
+            <hr>
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>菜单列表</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="width: 50%">
+                        <div id="menuTree2"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </form>
 </div>
 
@@ -97,7 +115,8 @@
     var form;
     var laydate;
     var tree;
-    var menuList;
+    var menuList; // 菜单列表
+    var menuIdList; // 菜单id
     $(function () {
         dataList(); // 加载表格数据
         getMenuTreeData(); // 获得菜单树的数据
@@ -163,6 +182,7 @@
                             var updateId = $('#updateId').val();
                             var roleNameUpdate = $('#roleNameUpdate').val();
                             var remarksUpdate = $('#remarksUpdate').val();
+                            var menuTreeData2 = tree.getChecked('menuTreeData2');
                             // 字段校验
                             var validation = formValidation(roleNameUpdate);
                             if (!validation) {
@@ -172,7 +192,8 @@
                                     data: {
                                         id: updateId,
                                         roleName: roleNameUpdate,
-                                        remarks: remarksUpdate
+                                        remarks: remarksUpdate,
+                                        menuTreeData: JSON.stringify(menuTreeData2)
                                     },
                                     success: function (res) {
                                         if (res.code == 200) {
@@ -187,6 +208,14 @@
                             }
                         }
                     });
+                    // 加载菜单列表
+                    var inst2 = tree.render({
+                        elem: '#menuTree2'  //绑定元素
+                        , showCheckbox: true // 是否显示复选框
+                        , id: 'menuTreeData2'
+                        , data: menuList
+                    });
+                    tree.setChecked('menuTreeData2', menuIdList); // 回显菜单
                 }
             });
         });
@@ -234,7 +263,7 @@
         var inst1 = tree.render({
             elem: '#menuTree'  //绑定元素
             , showCheckbox: true // 是否显示复选框
-            , id: 'menuTreeData' // 是否显示复选框
+            , id: 'menuTreeData'
             , data: menuList
         });
     }
@@ -262,7 +291,8 @@
         $('#updateId').val(obj.data.id);
         $('#roleNameUpdate').val(obj.data.roleName);
         $('#remarksUpdate').val(obj.data.remarks);
-
+        // 菜单id
+        menuIdList = obj.data.menuId;
         form.render(); //更新全部
     }
 

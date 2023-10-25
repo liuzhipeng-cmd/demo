@@ -75,7 +75,9 @@ public class RoleController {
     @ResponseBody
     public Map<String, Object> updateDataRole(HttpServletRequest request, RolePojo pojo) {
 
-        int num = roleService.updateDataRole(request, pojo);
+        String menuTreeData = request.getParameter("menuTreeData");
+
+        int num = roleService.updateDataRole(request, pojo,menuTreeData);
 
         if (num > 0) {
             return new Result().success(null);

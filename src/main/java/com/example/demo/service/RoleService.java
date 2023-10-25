@@ -30,15 +30,17 @@ public interface RoleService {
      *
      * @param request
      * @param pojo
+     * @param menuTreeData
      * @return
      */
-    int updateDataRole(HttpServletRequest request, RolePojo pojo);
+    int updateDataRole(HttpServletRequest request, RolePojo pojo, String menuTreeData);
 
     /**
      * 保存数据
      *
      * @param request
      * @param pojo
+     * @param menuTreeData
      * @return
      */
     int saveDataRole(HttpServletRequest request, RolePojo pojo, String menuTreeData);

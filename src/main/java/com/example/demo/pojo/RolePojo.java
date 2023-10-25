@@ -3,6 +3,8 @@ package com.example.demo.pojo;
 import com.example.common.utils.Base;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class RolePojo extends Base {
 
@@ -15,4 +17,9 @@ public class RolePojo extends Base {
      * 备注
      */
     private String remarks;
+
+    /**
+     * 菜单id
+     */
+    private List<Integer> menuId;
 }

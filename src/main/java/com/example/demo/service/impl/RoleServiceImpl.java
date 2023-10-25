@@ -37,6 +37,14 @@ public class RoleServiceImpl implements RoleService {
         PageHelper.startPage(pojo.getPage(), pojo.getLimit());
 
         List<RolePojo> list = roleDao.listRoleInfoPage(pojo);
+        if (!CollectionUtils.isEmpty(list)) {
+            for (int i = 0; i < list.size(); i++) {
+                String id = list.get(i).getId();
+                // 通过角色id查询菜单id
+                List<Integer> menuIdList = roleDao.listRoleMenuId(id);
+                list.get(i).setMenuId(menuIdList);
+            }
+        }
 
         PageInfo<RolePojo> pageInfo = new PageInfo<>(list);
 
@@ -65,10 +73,12 @@ public class RoleServiceImpl implements RoleService {
      *
      * @param request
      * @param pojo
+     * @param menuTreeData
      * @return
      */
     @Override
-    public int updateDataRole(HttpServletRequest request, RolePojo pojo) {
+    @Transactional
+    public int updateDataRole(HttpServletRequest request, RolePojo pojo, String menuTreeData) {
         UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
         // 获取当前时间（日期+时分秒）
         pojo.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
@@ -76,6 +86,10 @@ public class RoleServiceImpl implements RoleService {
         pojo.setUpdator(userPojo.getId());
         // 更新数据
         Integer num = roleDao.updateDataRole(pojo);
+        if (num > 0) {
+            // 将角色id与菜单id保存到数据库中
+            num = saveRoleMenu(pojo, menuTreeData);
+        }
         return num;
     }
 
@@ -84,6 +98,7 @@ public class RoleServiceImpl implements RoleService {
      *
      * @param request
      * @param pojo
+     * @param menuTreeData
      * @return
      */
     @Override
@@ -99,6 +114,7 @@ public class RoleServiceImpl implements RoleService {
         // 插入数据
         Integer num = roleDao.saveDataRole(pojo);
         if (num > 0) {
+            // 将角色id与菜单id保存到数据库中
             num = saveRoleMenu(pojo, menuTreeData);
         }
         return num;
@@ -135,6 +151,11 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     private int saveRoleMenu(RolePojo pojo, String menuTreeData) {
+        // 判断如果创建时间为空则清除角色与菜单关联信息表的信息
+        if (pojo.getCreateTime() == null) {
+            // 通过角色id清空之前的配置的菜单
+            roleDao.deleteRoleMenu(pojo.getId());
+        }
         // 转化数据
         List<Map<String, Object>> list = new GuidUtils().stringToListMap(menuTreeData);
         int num = 0;
@@ -146,8 +167,12 @@ public class RoleServiceImpl implements RoleService {
                 RoleMenuPojo roleMenuPojo = new RoleMenuPojo();
                 roleMenuPojo.setRoleId(pojo.getId());
                 roleMenuPojo.setMenuId(menuId);
+                // 如果是新增测CreateTime、Creator有值
                 roleMenuPojo.setCreateTime(pojo.getCreateTime());
                 roleMenuPojo.setCreator(pojo.getCreator());
+                // 如果是新增测UpdateTime、Updator有值
+                roleMenuPojo.setUpdateTime(pojo.getCreateTime());
+                roleMenuPojo.setUpdator(pojo.getUpdator());
                 num = roleDao.saveRoleMenu(roleMenuPojo);
                 if (num > 0) {
                     // 获取子节点菜单
@@ -160,8 +185,12 @@ public class RoleServiceImpl implements RoleService {
                             RoleMenuPojo roleMenuPojoChild = new RoleMenuPojo();
                             roleMenuPojoChild.setRoleId(pojo.getId());
                             roleMenuPojoChild.setMenuId(menuIdChild);
+                            // 如果是新增测CreateTime、Creator有值
                             roleMenuPojoChild.setCreateTime(pojo.getCreateTime());
                             roleMenuPojoChild.setCreator(pojo.getCreator());
+                            // 如果是新增测UpdateTime、Updator有值
+                            roleMenuPojoChild.setUpdateTime(pojo.getCreateTime());
+                            roleMenuPojoChild.setUpdator(pojo.getUpdator());
                             num = roleDao.saveRoleMenu(roleMenuPojoChild);
                         }
                     }

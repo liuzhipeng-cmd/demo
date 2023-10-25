@@ -26,21 +26,31 @@
 
     <!--删除数据-->
     <update id="deleteRole">
-        UPDATE role_info SET is_del = 1 WHERE id = #{id}
+        UPDATE role_info
+        SET is_del = 1
+        WHERE id = #{id}
     </update>
 
     <!--更新数据-->
     <update id="updateDataRole" parameterType="com.example.demo.pojo.RolePojo">
-        UPDATE role_info SET role_name = #{roleName},remarks = #{remarks},update_time = #{updateTime},updator = #{updator} WHERE id = #{id}
+        UPDATE role_info
+        SET role_name   = #{roleName},
+            remarks     = #{remarks},
+            update_time = #{updateTime},
+            updator     = #{updator}
+        WHERE id = #{id}
     </update>
 
     <insert id="saveDataRole" parameterType="com.example.demo.pojo.RolePojo">
-        INSERT INTO role_info(id,role_name,remarks,create_time,creator) VALUES (#{id},#{roleName},#{remarks},#{createTime},#{creator})
+        INSERT INTO role_info(id, role_name, remarks, create_time, creator)
+        VALUES (#{id}, #{roleName}, #{remarks}, #{createTime}, #{creator})
     </insert>
 
     <!--查询所有的角色id与name-->
     <select id="listRoleIdAndName" resultType="java.util.HashMap">
-        SELECT id,role_name as roleName FROM role_info WHERE is_del = 0
+        SELECT id, role_name as roleName
+        FROM role_info
+        WHERE is_del = 0
     </select>
 
     <!--通过角色id删除用户与角色关联表信息-->
@@ -50,8 +60,24 @@
         WHERE role_id = #{id}
     </update>
 
-    <!---->
+    <!--将角色id与菜单id保存到数据库中-->
     <insert id="saveRoleMenu" parameterType="com.example.demo.pojo.RoleMenuPojo">
-        INSERT INTO role_menu(role_id,menu_id,create_time,creator) VALUES (#{roleId},#{menuId},#{createTime},#{creator})
+        INSERT INTO role_menu(role_id, menu_id, create_time, creator)
+        VALUES (#{roleId}, #{menuId}, #{createTime}, #{creator})
     </insert>
+
+    <!--通过角色id查询菜单id-->
+    <select id="listRoleMenuId" resultType="java.lang.Integer">
+        SELECT menu_id as menuId
+        FROM role_menu
+        WHERE role_id = #{roleId}
+          AND is_del = 0
+    </select>
+
+    <!--通过角色id清空之前的配置的菜单-->
+    <update id="deleteRoleMenu">
+        UPDATE role_menu
+        SET is_del = 1
+        where role_id = #{roleId}
+    </update>
 </mapper>

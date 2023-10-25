@@ -22,9 +22,9 @@
 
     <!--插入数据-->
     <insert id="saveDataMenu" parameterType="com.example.demo.pojo.MenuPojo">
-        INSERT INTO menu_info(id, menu_name, menu_type, menu_action, is_child_node, create_time, menu_order,
+        INSERT INTO menu_info(menu_name, menu_type, menu_action, is_child_node, create_time, menu_order,
                               menu_remarks, creator, pid)
-        VALUES (#{id}, #{menuName}, #{menuType}, #{menuAction}, #{isChildNode}, #{createTime}, #{menuOrder},
+        VALUES (#{menuName}, #{menuType}, #{menuAction}, #{isChildNode}, #{createTime}, #{menuOrder},
                 #{menuRemarks}, #{creator}, #{pid})
     </insert>
 
