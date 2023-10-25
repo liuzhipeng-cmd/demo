@@ -125,6 +125,10 @@
             }
         };
 
+        // 默认打开首页
+        active.tabAdd('home', 2, '主页');
+        active.tabChange(2);
+
         function FrameWH() {
             var h = $(window).height();
             $('iframe').css('height', h + 'px')
