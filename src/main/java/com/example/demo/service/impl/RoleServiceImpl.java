@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +87,7 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
+    @Transactional
     public int saveDataRole(HttpServletRequest request, RolePojo pojo, String menuTreeData) {
         UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
         // 创建主键

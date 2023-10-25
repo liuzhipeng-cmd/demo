@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -59,6 +60,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
+    @Transactional
     public int saveDataUser(HttpServletRequest request, UserPojo pojo) {
         UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
         // 创建主键
@@ -100,6 +102,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
+    @Transactional
     public int deleteUser(String id) {
 
         int num = userDao.deleteUser(id);
@@ -118,6 +121,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
+    @Transactional
     public int updateDataUser(HttpServletRequest request, UserPojo pojo) {
         UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
         // 获取当前时间（日期+时分秒）
