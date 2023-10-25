@@ -352,9 +352,9 @@
     function statusOpenClose(id, type) {
         var str = ""
         if (type == 1) {
-            str = "启用"
-        } else if (type == 0) {
             str = "锁定"
+        } else if (type == 0) {
+            str = "启用"
         }
         layer.confirm('您确认想要' + str + '吗？', function (index) {
             $.ajax({
