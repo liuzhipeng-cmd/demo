@@ -72,7 +72,7 @@
         SET role_id     = #{roleId},
             update_time = #{updateTime},
             updator     = #{updator}
-        WHERE user_id = #{userId}
+        WHERE user_id = #{userId} AND is_del = 0
     </update>
 
     <!--通过用户id删除用户与角色关联表信息-->
