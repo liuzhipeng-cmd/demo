@@ -48,22 +48,6 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-block">
-                <input type="password" id="userPasswordSave" name="userPasswordSave" placeholder="请输入密码"
-                       autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">确认密码</label>
-            <div class="layui-input-block">
-                <input type="password" id="userPasswordTrueSave" name="userPasswordTrueSave" placeholder="请确认密码"
-                       autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
                 <input type="text" id="realNameSave" name="realNameSave" placeholder="请输入姓名" autocomplete="off"
@@ -274,17 +258,6 @@
                     });
                 }
             });
-
-            // 监听是否有子节点 有子节点则展示菜单动作，否则不展示菜单动作
-            form.on('radio(isChildNodeHideShow)', function (data) {
-                var isChildNodeHideShow = data.value;
-                if (isChildNodeHideShow == 2) {
-                    $('#menuActionDiv').hide();
-                    $('#menuActionSave').val('');
-                } else {
-                    $('#menuActionDiv').show();
-                }
-            });
             laydate.render({
                 elem: '#userBirthdaySave'
             });
@@ -303,22 +276,19 @@
             btnAlign: 'c',
             btn1: function (index) {
                 var userNameSave = $('#userNameSave').val();
-                var userPasswordSave = $('#userPasswordSave').val();
-                var userPasswordTrueSave = $('#userPasswordTrueSave').val();
                 var realNameSave = $('#realNameSave').val();
                 var userBirthdaySave = $('#userBirthdaySave').val();
                 var userPhoneSave = $('#userPhoneSave').val();
                 var remarkSave = $('#remarkSave').val();
                 var roleIdSave = $('#roleIdSave').val();
                 // 字段校验
-                var validation = formValidation(userNameSave, userPasswordSave, userPasswordTrueSave, realNameSave);
+                var validation = formValidation(userNameSave, realNameSave);
                 if (!validation) {
                     $.ajax({
                         url: ctx + '/saveDataUser',
                         method: 'post',
                         data: {
                             userName: userNameSave,
-                            userPassword: userPasswordSave,
                             realName: realNameSave,
                             userBirthday: userBirthdaySave,
                             userPhone: userPhoneSave,
@@ -343,8 +313,6 @@
     // 新增数据时清空表单数据
     function clearFormData() {
         $('#userNameSave').val('');
-        $('#userPasswordSave').val('');
-        $('#userPasswordTrueSave').val('');
         $('#realNameSave').val('');
         $('#userBirthdaySave').val('');
         $('#userPhoneSave').val('');
@@ -353,31 +321,16 @@
     }
 
     // 校验参数
-    function formValidation (userName,userPassword,userPasswordTrue,realName) {
+    function formValidation (userName,realName) {
         var flag = false;
         if (!userName) { // 账号
             flag = true;
             layer.alert("账号不能为空");
             return flag;
         }
-        if (!userPassword) { // 密码
-            flag = true;
-            layer.alert("密码不能为空");
-            return flag;
-        }
-        if (!userPasswordTrue) { // 确认密码
-            flag = true;
-            layer.alert("确认密码不能为空");
-            return flag;
-        }
         if (!realName) { // 姓名
             flag = true;
             layer.alert("姓名不能为空");
-            return flag;
-        }
-        if (userPassword != userPasswordTrue) {
-            flag = true;
-            layer.alert("密码与确认密码请保持一致");
             return flag;
         }
 

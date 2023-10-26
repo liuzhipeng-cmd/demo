@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DateTimeUtils;
 import com.example.common.utils.DesUtils;
 import com.example.common.utils.GuidUtils;
@@ -70,8 +71,8 @@ public class UserServiceImpl implements UserService {
         pojo.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 创建人
         pojo.setCreator(userPojo.getId());
-        // 获取密码
-        String userPassword = pojo.getUserPassword();
+        // 获取默认密码
+        String userPassword = ConstantUtils.DEFAULT_PASSWORD;
         // 对密码进行加密
         String encryptPassword = new DesUtils().encrypt(userPassword);
         // 加密后重新赋值
