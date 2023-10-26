@@ -1,0 +1,50 @@
+package com.example.demo.dao;
+
+import com.example.demo.pojo.SysDicPojo;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface SysDicDao {
+
+    /**
+     * 查询所有字典
+     *
+     * @param pojo
+     * @return
+     */
+    List<SysDicPojo> listSysDicPage(SysDicPojo pojo);
+
+    /**
+     * 删除数据
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteSysDic(String id);
+
+    /**
+     * 更新数据
+     *
+     * @param pojo
+     * @return
+     */
+    Integer updateDataSysDic(SysDicPojo pojo);
+
+    /**
+     * 保存数据
+     *
+     * @param pojo
+     * @return
+     */
+    Integer saveDataSysDic(SysDicPojo pojo);
+
+    /**
+     * 分页查询(子节点)
+     *
+     * @param pojo
+     * @return
+     */
+    List<SysDicPojo> listSysDicChildPage(SysDicPojo pojo);
+}

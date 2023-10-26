@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.SysDicDao">
+
+    <!--查询所有字典-->
+    <select id="listSysDicPage" resultType="com.example.demo.pojo.SysDicPojo">
+        SELECT s.id,
+        s.dic_code,
+        s.dic_name,
+        s.dic_order,
+        s.dic_type,
+        s.create_time,
+        s.creator,
+        s.update_time,
+        s.updator,
+        s.is_del,
+        s.pid,
+        s.remarks,
+        u.real_name AS creatorName,
+        ui.real_name AS updatorName
+        FROM sys_dic s
+        LEFT JOIN user_info u ON s.creator = u.id
+        LEFT JOIN user_info ui ON s.updator = ui.id
+        WHERE s.is_del = 0 and s.pid is null
+        <if test="dicType != null and dicType != ''">
+            and s.dic_type LIKE '%${dicType}%'
+        </if>
+        <if test="dicName != null and dicName != ''">
+            and s.dic_name LIKE '%${dicName}%'
+        </if>
+        ORDER BY s.create_time DESC
+    </select>
+
+    <!--删除数据-->
+    <update id="deleteSysDic">
+        UPDATE sys_dic
+        SET is_del = 1
+        WHERE id = #{id}
+    </update>
+
+    <!--更新数据-->
+    <update id="updateDataSysDic" parameterType="com.example.demo.pojo.SysDicPojo">
+        UPDATE sys_dic
+        SET dic_name    = #{dicName},
+            dic_code    = #{dicCode},
+            dic_order    = #{dicOrder},
+            remarks     = #{remarks},
+            update_time = #{updateTime},
+            updator     = #{updator}
+        WHERE id = #{id}
+    </update>
+
+    <!--保存数据-->
+    <insert id="saveDataSysDic" parameterType="com.example.demo.pojo.SysDicPojo">
+        INSERT INTO sys_dic(id, dic_code, dic_name, dic_order, dic_type, create_time, creator, pid)
+        VALUES (#{id}, #{dicCode}, #{dicName}, #{dicOrder}, #{dicType}, #{createTime}, #{creator}, #{pid})
+    </insert>
+
+    <!--查询所有字典(子节点)-->
+    <select id="listSysDicChildPage" resultType="com.example.demo.pojo.SysDicPojo">
+        SELECT s.id,
+        s.dic_code,
+        s.dic_name,
+        s.dic_order,
+        s.dic_type,
+        s.create_time,
+        s.creator,
+        s.update_time,
+        s.updator,
+        s.is_del,
+        s.pid,
+        s.remarks,
+        u.real_name AS creatorName,
+        ui.real_name AS updatorName
+        FROM sys_dic s
+        LEFT JOIN user_info u ON s.creator = u.id
+        LEFT JOIN user_info ui ON s.updator = ui.id
+        WHERE s.is_del = 0 and s.pid = #{pid}
+        <if test="dicName != null and dicName != ''">
+            and s.dic_name LIKE '%${dicName}%'
+        </if>
+        ORDER BY s.dic_order ASC
+    </select>
+</mapper>
