@@ -16,8 +16,8 @@
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
                 <a href="javascript:;">
                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                         class="layui-nav-img">
-                    管理员
+                         class="layui-nav-img">${realName}
+
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">Your Profile</a></dd>

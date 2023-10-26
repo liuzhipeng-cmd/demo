@@ -105,7 +105,11 @@ public class LoginController {
     @RequestMapping("/index")
     public String jumpIndex(HttpServletRequest request,ModelMap model) {
         UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        // 获取账号
         String userName = userPojo.getUserName();
+        // 获取姓名
+        String realName = userPojo.getRealName();
+        model.addAttribute("realName", realName);
         // 获取菜单
         List<Map<String, Object>> menuList = menuService.getMenuList(userName);
         model.addAttribute("menuList", menuList);
