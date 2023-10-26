@@ -107,4 +107,18 @@ public class SysDicServiceImpl implements SysDicService {
 
         return pageInfo;
     }
+
+    /**
+     * 通过数据字典类型查询该类型下的数据
+     *
+     * @param dicType
+     * @return
+     */
+    @Override
+    public List<SysDicPojo> getDictByCode(String dicType) {
+
+        List<SysDicPojo> list = sysDicDao.getDictByCode(dicType);
+
+        return list;
+    }
 }

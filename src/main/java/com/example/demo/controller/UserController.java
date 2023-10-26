@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.common.utils.Result;
+import com.example.demo.pojo.SysDicPojo;
 import com.example.demo.pojo.UserPojo;
 import com.example.demo.service.RoleService;
+import com.example.demo.service.SysDicService;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,17 @@ public class UserController {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    SysDicService sysDicService;
+
     @RequestMapping("/user")
     public String jumpUser(ModelMap model) {
         // 查询所有的角色id与name
         List<Map<String, Object>> roleList = roleService.listRoleIdAndName();
         model.addAttribute("roleList", roleList);
+        // 获取性别
+        List<SysDicPojo> genderTypeList = sysDicService.getDictByCode("GENDER_TYPE");
+        model.addAttribute("genderTypeList", genderTypeList);
         return "system/user";
     }
 

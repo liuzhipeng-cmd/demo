@@ -67,4 +67,9 @@ public class UserPojo extends Base {
      * 角色名称
      */
     private String roleName;
+
+    /**
+     * 性别（详见数据字典）
+     */
+    private String userGender;
 }

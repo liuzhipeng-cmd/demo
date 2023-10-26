@@ -4,6 +4,7 @@ import com.example.demo.pojo.SysDicPojo;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface SysDicService {
 
@@ -48,4 +49,12 @@ public interface SysDicService {
      * @return
      */
     PageInfo<SysDicPojo> listSysDicChildPage(SysDicPojo pojo);
+
+    /**
+     * 通过数据字典类型查询该类型下的数据
+     *
+     * @param genderType
+     * @return
+     */
+    List<SysDicPojo> getDictByCode(String genderType);
 }

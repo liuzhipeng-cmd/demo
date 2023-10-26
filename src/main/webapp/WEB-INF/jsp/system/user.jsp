@@ -55,9 +55,21 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-inline">
+                <select id="userGenderSave" name="userGenderSave">
+                    <option value="-1">请选择</option>
+                    <c:forEach var="item" items="${genderTypeList}">
+                        <option value="${item.dicCode}">${item.dicName}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">出生日期</label>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="userBirthdaySave" name="userBirthdaySave" placeholder="yyyy-MM-dd">
+                <input type="text" class="layui-input" id="userBirthdaySave" name="userBirthdaySave"
+                       placeholder="yyyy-MM-dd">
             </div>
         </div>
         <div class="layui-form-item">
@@ -108,9 +120,21 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-inline">
+                <select id="userGenderUpdate" name="userGenderUpdate">
+                    <option value="-1">请选择</option>
+                    <c:forEach var="item" items="${genderTypeList}">
+                        <option value="${item.dicCode}">${item.dicName}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">出生日期</label>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="userBirthdayUpdate" name="userBirthdayUpdate" placeholder="yyyy-MM-dd">
+                <input type="text" class="layui-input" id="userBirthdayUpdate" name="userBirthdayUpdate"
+                       placeholder="yyyy-MM-dd">
             </div>
         </div>
         <div class="layui-form-item">
@@ -161,7 +185,7 @@
 
     // 查询主数据
     function dataList() {
-        layui.use(['table', 'form','laydate'], function () {
+        layui.use(['table', 'form', 'laydate'], function () {
             table = layui.table;
             form = layui.form;
             laydate = layui.laydate;
@@ -178,20 +202,31 @@
                 , cols: [[ //表头
                     {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', align: "center"}
                     , {field: 'userName', title: '账号', width: 120, align: "center"}
-                    , {field: 'realName', title: '真实姓名', width: 120, align: "center"}
-                    , {field: 'userBirthday', title: '生日', width: 120, align: "center"}
-                    , {field: 'userPhone', title: '手机号', width: 120, align: "center"}
+                    , {field: 'realName', title: '真实姓名', width: 100, align: "center"}
+                    , {field: 'userGender', title: '性别', width: 80, align: "center",templet: function (d) {
+                        if (d.userGender == 1) {
+                            return '男';
+                        } else if (d.userGender == 2) {
+                            return '女';
+                        } else {
+                            return '未知';
+                        }
+                        }}
+                    , {field: 'userBirthday', title: '生日', width: 100, align: "center"}
+                    , {field: 'userPhone', title: '手机号', width: 100, align: "center"}
                     , {field: 'roleName', title: '角色名称', width: 120, align: "center"}
                     , {field: 'createTime', title: '创建时间', width: 180, align: "center"}
                     , {field: 'updateTime', title: '更新时间', width: 180, align: "center"}
                     , {field: 'remark', title: '备注', width: 120, align: "center"}
-                    , {field: 'isLock', title: '是否锁定', width: 100, align: "center", templet: function (d) {
+                    , {
+                        field: 'isLock', title: '是否锁定', width: 100, align: "center", templet: function (d) {
                             if (d.isLock == 0) {
                                 return '<a style="color: red" onclick="statusOpenClose(\'' + d.id + '\',1)">锁定</a>'
                             } else {
                                 return '<a style="color: green" onclick="statusOpenClose(\'' + d.id + '\',0)">启用</a>'
                             }
-                        }}
+                        }
+                    }
                     , {title: '操作', width: 200, align: 'center', toolbar: '#dataUserBarDemo', fixed: 'right'}
                 ]]
             });
@@ -227,6 +262,7 @@
                             var userPhoneUpdate = $('#userPhoneUpdate').val();
                             var remarkUpdate = $('#remarkUpdate').val();
                             var roleIdUpdate = $('#roleIdUpdate').val();
+                            var userGenderUpdate = $('#userGenderUpdate').val();
                             console.log(roleIdUpdate);
                             // 字段校验
                             var validation = formValidation(userNameUpdate, "null", "null", realNameUpdate);
@@ -241,7 +277,8 @@
                                         userBirthday: userBirthdayUpdate,
                                         userPhone: userPhoneUpdate,
                                         remark: remarkUpdate,
-                                        roleId: roleIdUpdate
+                                        roleId: roleIdUpdate,
+                                        userGender: userGenderUpdate
                                     },
                                     success: function (res) {
                                         if (res.code == 200) {
@@ -281,6 +318,7 @@
                 var userPhoneSave = $('#userPhoneSave').val();
                 var remarkSave = $('#remarkSave').val();
                 var roleIdSave = $('#roleIdSave').val();
+                var userGenderSave = $('#userGenderSave').val();
                 // 字段校验
                 var validation = formValidation(userNameSave, realNameSave);
                 if (!validation) {
@@ -293,7 +331,8 @@
                             userBirthday: userBirthdaySave,
                             userPhone: userPhoneSave,
                             remark: remarkSave,
-                            roleId: roleIdSave
+                            roleId: roleIdSave,
+                            userGender: userGenderSave
                         },
                         success: function (res) {
                             if (res.code == 200) {
@@ -318,10 +357,11 @@
         $('#userPhoneSave').val('');
         $('#remarkSave').val('');
         $('#roleIdSave').val('');
+        $('#userGenderSave').val('');
     }
 
     // 校验参数
-    function formValidation (userName,realName) {
+    function formValidation(userName, realName) {
         var flag = false;
         if (!userName) { // 账号
             flag = true;
@@ -367,6 +407,7 @@
         $('#userPhoneUpdate').val(obj.data.userPhone);
         $('#remarkUpdate').val(obj.data.remark);
         $('#roleIdUpdate').val(obj.data.roleId);
+        $('#userGenderUpdate').val(obj.data.userGender);
 
         form.render(); //更新全部
     }

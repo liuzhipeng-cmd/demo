@@ -13,8 +13,9 @@
     <select id="listUserInfoPage" resultType="com.example.demo.pojo.UserPojo">
         SELECT
         u.id,u.user_name,u.real_name,u.user_password,u.user_birthday,u.user_phone,u.is_lock,u.password_times,u.multi_tenant_id,u.create_time,u.update_time,u.is_del,u.remark,u.creator,u.updator,r.id
-        as roleId,r.role_name as roleName
-        FROM user_info u LEFT JOIN user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN role_info r ON ur.role_id=r.id AND r.is_del =0 WHERE
+        as roleId,r.role_name as roleName,u.user_gender
+        FROM user_info u LEFT JOIN user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN role_info r ON
+        ur.role_id=r.id AND r.is_del =0 WHERE
         u.is_del=0
         <if test="realName != null and realName != ''">
             and u.real_name LIKE '%${realName}%'
@@ -28,9 +29,9 @@
     <!--保存数据-->
     <insert id="saveDataUser" parameterType="com.example.demo.pojo.UserPojo">
         INSERT INTO user_info(id, user_name, real_name, user_password, user_birthday, user_phone, password_times,
-                              create_time, remark, creator)
+                              create_time, remark, creator,user_gender)
         VALUES (#{id}, #{userName}, #{realName}, #{userPassword}, #{userBirthday}, #{userPhone}, 3, #{createTime},
-                #{remark}, #{creator})
+                #{remark}, #{creator},#{userGender})
     </insert>
 
     <!--更新账号状态-->
@@ -52,6 +53,7 @@
         UPDATE user_info
         SET real_name     = #{realName},
             user_birthday = #{userBirthday},
+            user_gender   = #{userGender},
             user_phone    = #{userPhone},
             remark        = #{remark},
             update_time   = #{updateTime},

@@ -47,4 +47,12 @@ public interface SysDicDao {
      * @return
      */
     List<SysDicPojo> listSysDicChildPage(SysDicPojo pojo);
+
+    /**
+     * 通过数据字典类型查询该类型下的数据
+     *
+     * @param dicType
+     * @return
+     */
+    List<SysDicPojo> getDictByCode(String dicType);
 }

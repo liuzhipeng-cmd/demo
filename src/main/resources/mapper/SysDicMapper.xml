@@ -44,7 +44,7 @@
         UPDATE sys_dic
         SET dic_name    = #{dicName},
             dic_code    = #{dicCode},
-            dic_order    = #{dicOrder},
+            dic_order   = #{dicOrder},
             remarks     = #{remarks},
             update_time = #{updateTime},
             updator     = #{updator}
@@ -81,5 +81,13 @@
             and s.dic_name LIKE '%${dicName}%'
         </if>
         ORDER BY s.dic_order ASC
+    </select>
+
+    <!--通过数据字典类型查询该类型下的数据-->
+    <select id="getDictByCode" resultType="com.example.demo.pojo.SysDicPojo">
+        SELECT dic_code, dic_name
+        FROM sys_dic
+        WHERE pid in (SELECT id FROM sys_dic WHERE dic_type = 'gender_type')
+        ORDER BY dic_order ASC
     </select>
 </mapper>
