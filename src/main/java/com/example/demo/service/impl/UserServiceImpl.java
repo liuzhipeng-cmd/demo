@@ -163,15 +163,26 @@ public class UserServiceImpl implements UserService {
      */
     private int updateDataUserRole(UserPojo pojo) {
         UserRolePojo userRole = new UserRolePojo();
+        // 通过用户id查询用户与角色关联表数据
+        UserRolePojo userRolePojo = userDao.getUserRoleByUserId(pojo.getId());
         // 拼接参数
         userRole.setRoleId(pojo.getRoleId());// 角色id
         userRole.setUserId(pojo.getId());// 用户id
-        // 获取当前时间（日期+时分秒）
-        userRole.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
-        // 更新人
-        userRole.setUpdator(pojo.getUpdator());
-        int num = userDao.updateUserRole(userRole);
-        return num;
+        if (userRolePojo != null) {
+            // 获取当前时间（日期+时分秒）
+            userRole.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
+            // 更新人
+            userRole.setUpdator(pojo.getUpdator());
+            int num = userDao.updateUserRole(userRole);
+            return num;
+        } else {
+            // 获取当前时间（日期+时分秒）
+            userRole.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
+            // 创建人
+            userRole.setCreator(pojo.getUpdator());
+            int num = userDao.saveUserRole(userRole);
+            return num;
+        }
     }
 
     /**

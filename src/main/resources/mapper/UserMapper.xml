@@ -79,4 +79,9 @@
     <update id="deleteUserRole">
         UPDATE user_role SET is_del = 1 WHERE user_id = #{id}
     </update>
+
+    <!--通过用户id查询用户与角色关联表数据-->
+    <select id="getUserRoleByUserId" resultType="com.example.demo.pojo.UserRolePojo">
+        SELECT * FROM user_role WHERE user_id = #{id}
+    </select>
 </mapper>
