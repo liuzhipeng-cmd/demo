@@ -168,6 +168,7 @@ public class UserServiceImpl implements UserService {
         // 拼接参数
         userRole.setRoleId(pojo.getRoleId());// 角色id
         userRole.setUserId(pojo.getId());// 用户id
+        // 判断如果通过id查询到数据则进行更新，否则进行添加
         if (userRolePojo != null) {
             // 获取当前时间（日期+时分秒）
             userRole.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
