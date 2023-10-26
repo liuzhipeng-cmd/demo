@@ -132,15 +132,15 @@ public class MenuServiceImpl implements MenuService {
      * @return
      */
     @Override
-    public List<Map<String, Object>> getMenuList() {
+    public List<Map<String, Object>> getMenuList(String userName) {
         // 获取主菜单
-        List<Map<String, Object>> list = menuDao.getHomeMenuList();
+        List<Map<String, Object>> list = menuDao.getHomeMenuList(userName);
         // 判断主菜单是否有值
         if (!CollectionUtils.isEmpty(list)) {
             for (int i = 0; i < list.size(); i++) {
                 String pid = String.valueOf(list.get(i).get("id"));
                 // 通过主菜单id查询对应的子菜单
-                List<Map<String, Object>> childList = menuDao.getChildMenuList(pid);
+                List<Map<String, Object>> childList = menuDao.getChildMenuList(pid,userName);
                 list.get(i).put("childList", childList);
             }
         }
@@ -154,15 +154,15 @@ public class MenuServiceImpl implements MenuService {
      * @return
      */
     @Override
-    public List<Map<String, Object>> getMenuRoleList() {
+    public List<Map<String, Object>> getMenuRoleList(String userName) {
         // 获取主菜单
-        List<Map<String, Object>> list = menuDao.getHomeMenuRoleList();
+        List<Map<String, Object>> list = menuDao.getHomeMenuRoleList(userName);
         // 判断主菜单是否有值
         if (!CollectionUtils.isEmpty(list)) {
             for (int i = 0; i < list.size(); i++) {
                 String pid = String.valueOf(list.get(i).get("id"));
                 // 通过主菜单id查询对应的子菜单
-                List<Map<String, Object>> childList = menuDao.getChildMenuRoleList(pid);
+                List<Map<String, Object>> childList = menuDao.getChildMenuRoleList(pid,userName);
                 list.get(i).put("children", childList);
             }
         }

@@ -66,13 +66,13 @@ public interface MenuService {
      *
      * @return
      */
-    List<Map<String, Object>> getMenuList();
+    List<Map<String, Object>> getMenuList(String userName);
 
     /**
      * 获取菜单(角色模块)
      *
      * @return
      */
-    List<Map<String, Object>> getMenuRoleList();
+    List<Map<String, Object>> getMenuRoleList(String userName);
 
 }

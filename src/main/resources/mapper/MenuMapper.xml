@@ -68,21 +68,57 @@
 
     <!--获取主菜单-->
     <select id="getHomeMenuList" resultType="java.util.HashMap">
-        SELECT id,menu_name,menu_action,is_child_node FROM menu_info WHERE is_del = 0 AND menu_status = 0 AND pid is NULL ORDER BY menu_order ASC
+        SELECT m.id, m.menu_name, m.menu_action, m.is_child_node
+        FROM menu_info m
+                 LEFT JOIN role_menu r ON m.id = r.menu_id AND r.is_del = 0
+                 LEFT JOIN user_role ur ON r.role_id = ur.role_id and ur.is_del = 0
+                 LEFT JOIN user_info u ON ur.user_id = u.id AND u.is_del = 0
+        WHERE m.is_del = 0
+          AND m.menu_status = 0
+          AND u.user_name = #{userName}
+          AND m.pid IS NULL
+        ORDER BY m.menu_order ASC
     </select>
 
     <!--通过主菜单id查询对应的子菜单-->
     <select id="getChildMenuList" resultType="java.util.HashMap">
-        SELECT id,menu_name,menu_action FROM menu_info WHERE is_del = 0 AND menu_status = 0 AND pid = #{pid} ORDER BY menu_order ASC
+        SELECT m.id, m.menu_name, m.menu_action
+        FROM menu_info m
+                 LEFT JOIN role_menu r ON m.id = r.menu_id AND r.is_del = 0
+                 LEFT JOIN user_role ur ON r.role_id = ur.role_id and ur.is_del = 0
+                 LEFT JOIN user_info u ON ur.user_id = u.id AND u.is_del = 0
+        WHERE m.is_del = 0
+          AND m.menu_status = 0
+          AND m.pid = #{pid}
+          AND u.user_name = #{userName}
+        ORDER BY m.menu_order ASC
     </select>
 
     <!--获取主菜单-->
     <select id="getHomeMenuRoleList" resultType="java.util.HashMap">
-        SELECT id,menu_name as title FROM menu_info WHERE is_del = 0 AND menu_status = 0 AND pid is NULL ORDER BY menu_order ASC
+        SELECT m.id, m.menu_name as title
+        FROM menu_info m
+                 LEFT JOIN role_menu r ON m.id = r.menu_id AND r.is_del = 0
+                 LEFT JOIN user_role ur ON r.role_id = ur.role_id and ur.is_del = 0
+                 LEFT JOIN user_info u ON ur.user_id = u.id AND u.is_del = 0
+        WHERE m.is_del = 0
+          AND m.menu_status = 0
+          AND u.user_name = #{userName}
+          AND m.pid is NULL
+        ORDER BY m.menu_order ASC
     </select>
 
     <!--通过主菜单id查询对应的子菜单-->
     <select id="getChildMenuRoleList" resultType="java.util.HashMap">
-        SELECT id,menu_name as title FROM menu_info WHERE is_del = 0 AND menu_status = 0 AND pid = #{pid} ORDER BY menu_order ASC
+        SELECT m.id, m.menu_name as title
+        FROM menu_info m
+                 LEFT JOIN role_menu r ON m.id = r.menu_id AND r.is_del = 0
+                 LEFT JOIN user_role ur ON r.role_id = ur.role_id and ur.is_del = 0
+                 LEFT JOIN user_info u ON ur.user_id = u.id AND u.is_del = 0
+        WHERE m.is_del = 0
+          AND m.menu_status = 0
+          AND u.user_name = #{userName}
+          AND m.pid = #{pid}
+        ORDER BY m.menu_order ASC
     </select>
 </mapper>

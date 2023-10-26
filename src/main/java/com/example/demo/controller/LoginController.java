@@ -103,9 +103,11 @@ public class LoginController {
     }
 
     @RequestMapping("/index")
-    public String jumpIndex(ModelMap model) {
+    public String jumpIndex(HttpServletRequest request,ModelMap model) {
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        String userName = userPojo.getUserName();
         // 获取菜单
-        List<Map<String, Object>> menuList = menuService.getMenuList();
+        List<Map<String, Object>> menuList = menuService.getMenuList(userName);
         model.addAttribute("menuList", menuList);
         return "index";
     }
@@ -179,11 +181,15 @@ public class LoginController {
         }
     }
 
+    /**
+     * 跳转首页
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/home")
     public String jumpHome(ModelMap model) {
-//        // 获取菜单
-//        List<Map<String, Object>> menuList = menuService.getMenuList();
-//        model.addAttribute("menuList", menuList);
+
         return "home";
     }
 }

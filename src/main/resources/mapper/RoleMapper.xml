@@ -68,10 +68,7 @@
 
     <!--通过角色id查询菜单id-->
     <select id="listRoleMenuId" resultType="java.lang.Integer">
-        SELECT menu_id as menuId
-        FROM role_menu
-        WHERE role_id = #{roleId}
-          AND is_del = 0
+        SELECT r.menu_id as menuId FROM role_menu r LEFT JOIN menu_info m ON r.menu_id = m.id WHERE m.menu_action != '' and r.role_id = #{roleId} AND r.is_del = 0
     </select>
 
     <!--通过角色id清空之前的配置的菜单-->

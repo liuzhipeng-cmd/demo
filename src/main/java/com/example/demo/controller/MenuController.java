@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.common.utils.Result;
 import com.example.demo.pojo.MenuPojo;
+import com.example.demo.pojo.UserPojo;
 import com.example.demo.service.MenuService;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -146,9 +147,10 @@ public class MenuController {
      */
     @RequestMapping("/menuTreeData")
     @ResponseBody
-    public List<Map<String, Object>> menuTreeData() {
-
-        List<Map<String, Object>> menuList = menuService.getMenuRoleList();
+    public List<Map<String, Object>> menuTreeData(HttpServletRequest request) {
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        String userName = userPojo.getUserName();
+        List<Map<String, Object>> menuList = menuService.getMenuRoleList(userName);
 
         return menuList;
     }
