@@ -139,8 +139,8 @@
 </div>
 
 <script type="text/html" id="dataMenuBarDemo">
-    <a class="layui-btn layui-btn-primary layui-border-green layui-btn-sm" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-primary layui-border-red layui-btn-sm" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-primary layui-border-green layui-btn-sm button-group-child" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-primary layui-border-red layui-btn-sm button-group-child" lay-event="del">删除</a>
 </script>
 <script>
     var table;
