@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.common.utils.DesUtils;
 import com.example.demo.pojo.UserPojo;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.MenuService;
@@ -87,8 +88,10 @@ public class LoginController {
         } else {
             // 数据库查询出来的密码
             String userPasswordDatabase = user.getUserPassword();
+            // 对密码进行解密
+            String decrypt = new DesUtils().decrypt(userPasswordDatabase);
             // 判断密码是否一致
-            if (!userPasswordReception.equals(userPasswordDatabase)) {
+            if (!userPasswordReception.equals(decrypt)) {
                 model.addAttribute("errorText", "密码错误！");
                 return "redirect:/";
             }

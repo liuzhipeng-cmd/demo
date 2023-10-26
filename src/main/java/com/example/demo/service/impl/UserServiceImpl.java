@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.common.utils.DateTimeUtils;
+import com.example.common.utils.DesUtils;
 import com.example.common.utils.GuidUtils;
 import com.example.demo.dao.UserDao;
 import com.example.demo.pojo.UserPojo;
@@ -69,6 +70,12 @@ public class UserServiceImpl implements UserService {
         pojo.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 创建人
         pojo.setCreator(userPojo.getId());
+        // 获取密码
+        String userPassword = pojo.getUserPassword();
+        // 对密码进行加密
+        String encryptPassword = new DesUtils().encrypt(userPassword);
+        // 加密后重新赋值
+        pojo.setUserPassword(encryptPassword);
 
         int num = userDao.saveDataUser(pojo);
 
