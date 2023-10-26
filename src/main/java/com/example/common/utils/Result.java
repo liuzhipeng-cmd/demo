@@ -19,8 +19,11 @@ public class Result {
     }
 
     public Map<String, Object> fail(String msg) {
-
-        return fail(400, msg, null);
+        if ("".equals(msg)) {
+            return fail(400, "操作失败", null);
+        } else {
+            return fail(400, msg, null);
+        }
     }
 
     public Map<String, Object> fail(int code, String msg, Object data) {
