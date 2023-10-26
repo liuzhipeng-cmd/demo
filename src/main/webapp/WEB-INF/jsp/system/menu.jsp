@@ -19,16 +19,6 @@
         </div>
         <div class="layui-col-md3">
             <div class="layui-form-item">
-                <label class="layui-form-label">菜单类型</label>
-                <div class="layui-input-block">
-                    <select id="menuType" name="menuType" class="layui-input">
-                        <option value="-1">全部</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md3">
-            <div class="layui-form-item">
                 <label class="layui-form-label">菜单状态</label>
                 <div class="layui-input-block">
                     <select id="menuStatus" name="menuStatus" class="layui-input">
@@ -60,14 +50,6 @@
             <div class="layui-input-block">
                 <input type="text" id="menuNameSave" name="menuNameSave" placeholder="请输入菜单名称" autocomplete="off"
                        class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">菜单类型</label>
-            <div class="layui-input-block">
-                <select id="menuTypeSave" name="menuTypeSave">
-                    <option value="-1">请选择</option>
-                </select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -112,14 +94,6 @@
             <div class="layui-input-block">
                 <input type="text" id="menuNameUpdate" name="menuNameUpdate" placeholder="请输入菜单名称"
                        autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">菜单类型</label>
-            <div class="layui-input-block">
-                <select id="menuTypeUpdate" name="menuTypeUpdate" disabled="disabled">
-                    <option value="-1">请选择</option>
-                </select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -186,14 +160,12 @@
                 , url: '${ctx}/listMenuInfoPage' //数据接口
                 , where: {
                     menuName: $('#menuName').val(),
-                    menuType: $('#menuType').val(),
                     menuStatus: $('#menuStatus').val()
                 }
                 , page: true //开启分页
                 , cols: [[ //表头
                     {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', align: "center"}
                     , {field: 'menuName', title: '菜单名称', width: 120, align: "center"}
-                    , {field: 'menuType', title: '菜单类型', width: 120, align: "center"}
                     , {field: 'menuAction', title: '菜单动作', width: 120, align: "center"}
                     , {
                         field: 'isChildNode',
@@ -256,7 +228,7 @@
                             var menuRemarksUpdate = $('#menuRemarksUpdate').val();
                             var isChildNodeUpdate = $('input[name="isChildNodeUpdate"]:checked').val();
                             // 字段校验
-                            var validation = formValidation(menuNameUpdate, menuTypeUpdate, menuActionUpdate, menuOrderUpdate, isChildNodeUpdate);
+                            var validation = formValidation(menuNameUpdate, menuActionUpdate, menuOrderUpdate, isChildNodeUpdate);
                             if (!validation) {
                                 $.ajax({
                                     url: ctx + '/updateDataMenu',
@@ -311,20 +283,18 @@
             btnAlign: 'c',
             btn1: function (index) {
                 var menuNameSave = $('#menuNameSave').val();
-                var menuTypeSave = $('#menuTypeSave').val();
                 var menuActionSave = $('#menuActionSave').val();
                 var isChildNodeSave = $('input[name="isChildNodeSave"]:checked').val();
                 var menuOrderSave = $('#menuOrderSave').val();
                 var menuRemarksSave = $('#menuRemarksSave').val();
                 // 字段校验
-                var validation = formValidation(menuNameSave, menuTypeSave, menuActionSave, menuOrderSave, isChildNodeSave);
+                var validation = formValidation(menuNameSave, menuActionSave, menuOrderSave, isChildNodeSave);
                 if (!validation) {
                     $.ajax({
                         url: ctx + '/saveDataMenu',
                         method: 'post',
                         data: {
                             menuName: menuNameSave,
-                            menuType: menuTypeSave,
                             menuAction: menuActionSave,
                             isChildNode: isChildNodeSave,
                             menuOrder: menuOrderSave,
@@ -346,16 +316,11 @@
     }
 
     // 表单验证
-    function formValidation(menuName, menuType, menuAction, menuOrder, isChildNode) {
+    function formValidation(menuName, menuAction, menuOrder, isChildNode) {
         var flag = false;
         if (!menuName) { // 菜单名称
             flag = true;
             layer.alert("菜单名称不能为空");
-            return flag;
-        }
-        if (!menuType) { // 菜单类型
-            flag = true;
-            layer.alert("菜单类型不能为空");
             return flag;
         }
         // 判断如果子节点的值为否  则验证菜单动作，否则不验证
@@ -377,7 +342,6 @@
     // 新增数据时清空表单数据
     function clearFormData() {
         $('#menuNameSave').val(''); // 菜单名称
-        $('#menuTypeSave').val('-1'); // 菜单类型
         $('#menuActionSave').val(''); // 菜单动作
         $('#menuOrderSave').val(''); // 显示顺序
         $('#menuRemarksSave').val(''); // 菜单备注
@@ -390,7 +354,6 @@
     function echoData(obj) {
         $('#updateId').val(obj.data.id);
         $('#menuNameUpdate').val(obj.data.menuName);
-        $('#menuTypeUpdate').val(obj.data.menuType);
         if (obj.data.isChildNode == 1) {
             $('#isChildNode1Update').prop("checked", true);
         } else {

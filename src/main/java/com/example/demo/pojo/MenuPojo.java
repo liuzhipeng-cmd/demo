@@ -12,11 +12,6 @@ public class MenuPojo extends Base {
     private String menuName;
 
     /**
-     * 菜单类型
-     */
-    private Integer menuType;
-
-    /**
      * 菜单状态（0：未锁定 1：锁定）
      */
     private Integer menuStatus;
