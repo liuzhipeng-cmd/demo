@@ -97,7 +97,7 @@
             <label class="layui-form-label">账号</label>
             <div class="layui-input-block">
                 <input type="text" id="userNameUpdate" name="userNameUpdate" placeholder="请输入账号" autocomplete="off"
-                       class="layui-input">
+                       class="layui-input" disabled="disabled">
             </div>
         </div>
         <div class="layui-form-item">

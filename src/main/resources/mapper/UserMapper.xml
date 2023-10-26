@@ -50,8 +50,7 @@
     <!--更新数据-->
     <update id="updateDataUser" parameterType="com.example.demo.pojo.UserPojo">
         UPDATE user_info
-        SET user_name     = #{userName},
-            real_name     = #{realName},
+        SET real_name     = #{realName},
             user_birthday = #{userBirthday},
             user_phone    = #{userPhone},
             remark        = #{remark},
