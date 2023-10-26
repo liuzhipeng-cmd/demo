@@ -20,9 +20,8 @@
 
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">Your Profile</a></dd>
-                    <dd><a href="">Settings</a></dd>
-                    <dd><a href="">Sign out</a></dd>
+                    <dd><a id="changePassword">修改密码</a></dd>
+                    <dd><a id="loginOut">退出</a></dd>
                 </dl>
             </li>
         </ul>
@@ -72,6 +71,26 @@
             <span>网址：www.baidu.com</span>
         </div>
     </div>
+</div>
+
+<div style="display: none" id="updatePassword">
+    <form class="layui-form" action="">
+        <input type="hidden" id="userName" value="${userName}">
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码<i class="asterisk">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" id="password" name="password" placeholder="请输入密码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认密码<i class="asterisk">*</i></label>
+            <div class="layui-input-inline">
+                <input type="text" id="password2" name="password2" placeholder="请确认密码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
 </div>
 <script type="text/javascript">
     layui.use(['element', 'layer', 'util'], function () {
@@ -133,7 +152,77 @@
             var h = $(window).height();
             $('iframe').css('height', h + 'px')
         }
+
+        // 修改密码绑定点击事件
+        $('#changePassword').on("click",function () {
+            // 修改密码弹出框
+            layer.open({
+                title: '修改密码',
+                type: 1,
+                area: ['20%', '30%'],
+                content: $('#updatePassword'),
+                btn: ['确定', '取消'],
+                btnAlign: 'c',
+                btn1: function (index) {
+                    var password = $('#password').val();
+                    var password2 = $('#password2').val();
+                    var userName = $('#userName').val();
+                    // 字段校验
+                    var validation = formValidation(password,password2);
+                    if (!validation) {
+                        $.ajax({
+                            url: ctx + '/updatePassword',
+                            method: 'post',
+                            data: {
+                                userName: userName,
+                                password: password
+                            },
+                            success: function (res) {
+                                if (res.code == 200) {
+                                    layer.alert(res.msg);
+                                    layer.close(index);
+                                    setTimeout(function () {
+                                        window.location.href = ctx + '/';
+                                    },2000);
+
+                                } else {
+                                    layer.alert(res.msg);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        // 退出
+        $('#loginOut').on("click",function () {
+            window.location.href = ctx + '/login_out';
+        })
     });
+
+    // 字段验证
+    function formValidation (password,password2) {
+        var flag = false;
+        if (!password) { // 密码
+            flag = true;
+            layer.alert("密码不能为空");
+            return flag;
+        }
+        if (!password2) { // 确认密码
+            flag = true;
+            layer.alert("确认密码不能为空");
+            return flag;
+        }
+
+        if (password != password2) {
+            flag = true;
+            layer.alert("密码与确认密码请保持一致");
+            return flag;
+        }
+
+        return flag;
+    }
 </script>
 </body>
 </html>

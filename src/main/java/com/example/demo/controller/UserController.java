@@ -129,4 +129,24 @@ public class UserController {
         }
         return new Result().fail("");
     }
+
+    /**
+     * 修改密码
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> updatePassword(HttpServletRequest request,String userName, String password) {
+
+        int num = userService.updatePassword(userName, password);
+
+        if (num > 0) {
+            request.getSession().setAttribute("userInfo", null);
+            return new Result().success(null);
+        }
+        return new Result().fail("");
+    }
 }

@@ -55,4 +55,13 @@ public interface UserService {
      * @return
      */
     int updateDataUser(HttpServletRequest request, UserPojo pojo);
+
+    /**
+     * 修改密码
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    int updatePassword(String userName, String password);
 }

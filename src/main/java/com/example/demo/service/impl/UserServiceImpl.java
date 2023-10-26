@@ -145,6 +145,23 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 修改密码
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    @Override
+    public int updatePassword(String userName, String password) {
+        // 对密码进行加密
+        String encryptPassword = new DesUtils().encrypt(password);
+        // 修改密码
+        Integer num = userDao.updatePassword(userName,encryptPassword);
+
+        return num;
+    }
+
+    /**
      * 将角色id与用户id保存到用户与角色关联表
      *
      * @param pojo

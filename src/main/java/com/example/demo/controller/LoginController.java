@@ -102,11 +102,18 @@ public class LoginController {
         return "redirect:/index";
     }
 
+    @RequestMapping("/login_out")
+    public String login_out (HttpServletRequest request) {
+        request.getSession().setAttribute("userInfo", null);
+        return "redirect:/index";
+    }
+
     @RequestMapping("/index")
     public String jumpIndex(HttpServletRequest request,ModelMap model) {
         UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
         // 获取账号
         String userName = userPojo.getUserName();
+        model.addAttribute("userName",userName);
         // 获取姓名
         String realName = userPojo.getRealName();
         model.addAttribute("realName", realName);

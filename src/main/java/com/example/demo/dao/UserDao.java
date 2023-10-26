@@ -91,4 +91,13 @@ public interface UserDao {
      * @return
      */
     UserRolePojo getUserRoleByUserId(String id);
+
+    /**
+     * 修改密码
+     *
+     * @param userName
+     * @param encryptPassword
+     * @return
+     */
+    Integer updatePassword(@Param("userName") String userName, @Param("encryptPassword") String encryptPassword);
 }
