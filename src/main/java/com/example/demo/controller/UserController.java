@@ -68,11 +68,16 @@ public class UserController {
     @RequestMapping(value = "/saveDataUser", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> saveDataUser(HttpServletRequest request, UserPojo pojo) {
-
-        int num = userService.saveDataUser(request, pojo);
-        if (num > 0) {
-            return new Result().success(null);
+        UserPojo user = userService.getUser(pojo.getUserName());
+        if (user != null) {
+            return new Result().fail("账号已存在，请重新输入");
+        } else {
+            int num = userService.saveDataUser(request, pojo);
+            if (num > 0) {
+                return new Result().success(null);
+            }
         }
+
         return new Result().fail("");
     }
 
@@ -139,7 +144,7 @@ public class UserController {
      */
     @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> updatePassword(HttpServletRequest request,String userName, String password) {
+    public Map<String, Object> updatePassword(HttpServletRequest request, String userName, String password) {
 
         int num = userService.updatePassword(userName, password);
 
