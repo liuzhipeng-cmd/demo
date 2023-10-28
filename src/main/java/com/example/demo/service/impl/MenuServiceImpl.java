@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DateTimeUtils;
 import com.example.common.utils.GuidUtils;
 import com.example.demo.dao.MenuDao;
@@ -49,7 +50,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public int saveDataMenu(HttpServletRequest request, MenuPojo pojo) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 获取当前时间（日期+时分秒）
         pojo.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 创建人
@@ -69,7 +70,7 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public int updateDataMenu(HttpServletRequest request, MenuPojo pojo) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 获取当前时间（日期+时分秒）
         pojo.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 更新人

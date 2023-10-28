@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DateTimeUtils;
 import com.example.demo.dao.SysDicDao;
 import com.example.demo.pojo.SysDicPojo;
@@ -60,7 +61,7 @@ public class SysDicServiceImpl implements SysDicService {
      */
     @Override
     public int updateDataSysDic(HttpServletRequest request, SysDicPojo pojo) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 获取当前时间（日期+时分秒）
         pojo.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 更新人
@@ -79,7 +80,7 @@ public class SysDicServiceImpl implements SysDicService {
      */
     @Override
     public int saveDataSysDic(HttpServletRequest request, SysDicPojo pojo) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 获取当前时间（日期+时分秒）
         pojo.setCreateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 创建人

@@ -1,5 +1,6 @@
 package com.example.demo.interceptor;
 
+import com.example.common.utils.ConstantUtils;
 import com.example.demo.pojo.UserPojo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,7 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        UserPojo userInfo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userInfo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         if (userInfo == null) {
             response.sendRedirect("/demo");
             return false;

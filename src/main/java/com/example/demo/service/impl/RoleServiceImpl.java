@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DateTimeUtils;
 import com.example.common.utils.GuidUtils;
 import com.example.demo.dao.RoleDao;
@@ -79,7 +80,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public int updateDataRole(HttpServletRequest request, RolePojo pojo, String menuTreeData) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 获取当前时间（日期+时分秒）
         pojo.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 更新人
@@ -104,7 +105,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public int saveDataRole(HttpServletRequest request, RolePojo pojo, String menuTreeData) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 创建主键
         pojo.setId(new GuidUtils().GuidUtils());
         // 获取当前时间（日期+时分秒）

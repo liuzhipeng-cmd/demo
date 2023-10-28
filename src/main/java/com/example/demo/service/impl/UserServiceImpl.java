@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public int saveDataUser(HttpServletRequest request, UserPojo pojo) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 创建主键
         pojo.setId(new GuidUtils().GuidUtils());
         // 获取当前时间（日期+时分秒）
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public int updateDataUser(HttpServletRequest request, UserPojo pojo) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 获取当前时间（日期+时分秒）
         pojo.setUpdateTime(new DateTimeUtils().getYearMonthDayHourMinuteSecond());
         // 更新人

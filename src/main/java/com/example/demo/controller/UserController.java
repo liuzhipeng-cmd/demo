@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.Result;
 import com.example.demo.pojo.SysDicPojo;
 import com.example.demo.pojo.UserPojo;
@@ -149,7 +150,7 @@ public class UserController {
         int num = userService.updatePassword(userName, password);
 
         if (num > 0) {
-            request.getSession().setAttribute("userInfo", null);
+            request.getSession().setAttribute(ConstantUtils.USER_INFO, null);
             return new Result().success(null);
         }
         return new Result().fail("");

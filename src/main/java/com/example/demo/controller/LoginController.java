@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DesUtils;
 import com.example.demo.pojo.UserPojo;
 import com.example.demo.service.LoginService;
@@ -97,20 +98,20 @@ public class LoginController {
             }
         }
         // 将用户信息存入session中以备后续使用
-        session.setAttribute("userInfo", user);
+        session.setAttribute(ConstantUtils.USER_INFO, user);
 
         return "redirect:/index";
     }
 
     @RequestMapping("/login_out")
     public String login_out (HttpServletRequest request) {
-        request.getSession().setAttribute("userInfo", null);
+        request.getSession().setAttribute(ConstantUtils.USER_INFO, null);
         return "redirect:/index";
     }
 
     @RequestMapping("/index")
     public String jumpIndex(HttpServletRequest request,ModelMap model) {
-        UserPojo userPojo = (UserPojo) request.getSession().getAttribute("userInfo");
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         // 获取账号
         String userName = userPojo.getUserName();
         model.addAttribute("userName",userName);
