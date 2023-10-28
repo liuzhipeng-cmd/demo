@@ -43,14 +43,14 @@
 <div style="display: none" id="saveDialog">
     <form class="layui-form" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">字典类型</label>
+            <label class="layui-form-label">字典类型<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="dicTypeSave" name="dicTypeSave" placeholder="请输入字典类型" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">字典名称</label>
+            <label class="layui-form-label">字典名称<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="dicNameSave" name="dicNameSave" placeholder="请输入字典名称" autocomplete="off"
                        class="layui-input">
@@ -71,7 +71,7 @@
     <form class="layui-form" action="">
         <input id="updateId" name="updateId" type="hidden" disabled="disabled">
         <div class="layui-form-item">
-            <label class="layui-form-label">字典类型</label>
+            <label class="layui-form-label">字典类型<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="dicTypeUpdate" name="dicTypeUpdate" placeholder="请输入字典类型"
                        autocomplete="off"
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">字典名称</label>
+            <label class="layui-form-label">字典名称<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="dicNameUpdate" name="dicNameUpdate" placeholder="请输入字典名称"
                        autocomplete="off"

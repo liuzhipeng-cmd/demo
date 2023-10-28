@@ -46,14 +46,14 @@
 <div style="display: none" id="saveDialog">
     <form class="layui-form" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">菜单名称</label>
+            <label class="layui-form-label">菜单名称<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="menuNameSave" name="menuNameSave" placeholder="请输入菜单名称" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">是否有子节点</label>
+            <label class="layui-form-label">是否有子节点<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="radio" name="isChildNodeSave" id="isChildNode2Save" value="2" title="是"
                        lay-filter="isChildNodeHideShow">
@@ -62,14 +62,14 @@
             </div>
         </div>
         <div class="layui-form-item" id="menuActionDiv">
-            <label class="layui-form-label">菜单动作</label>
+            <label class="layui-form-label">菜单动作<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="menuActionSave" name="menuActionSave" placeholder="请输入菜单动作"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">显示顺序</label>
+            <label class="layui-form-label">显示顺序<i class="asterisk">*</i></label>
             <div class="layui-input-inline">
                 <input type="text" id="menuOrderSave" name="menuOrderSave" placeholder="请输入显示顺序"
                        autocomplete="off" class="layui-input">
@@ -90,14 +90,14 @@
     <form class="layui-form" action="">
         <input id="updateId" name="updateId" type="hidden" disabled="disabled">
         <div class="layui-form-item">
-            <label class="layui-form-label">菜单名称</label>
+            <label class="layui-form-label">菜单名称<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="menuNameUpdate" name="menuNameUpdate" placeholder="请输入菜单名称"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">是否有子节点</label>
+            <label class="layui-form-label">是否有子节点<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="radio" name="isChildNodeUpdate" id="isChildNode2Update" value="2" title="是"
                        lay-filter="isChildNodeHideShow" disabled="disabled">
@@ -106,14 +106,14 @@
             </div>
         </div>
         <div class="layui-form-item" id="menuActionDiv2">
-            <label class="layui-form-label">菜单动作</label>
+            <label class="layui-form-label">菜单动作<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="menuActionUpdate" name="menuActionUpdate" placeholder="请输入菜单动作"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">显示顺序</label>
+            <label class="layui-form-label">显示顺序<i class="asterisk">*</i></label>
             <div class="layui-input-inline">
                 <input type="text" id="menuOrderUpdate" name="menuOrderUpdate" placeholder="请输入显示顺序"
                        autocomplete="off" class="layui-input">

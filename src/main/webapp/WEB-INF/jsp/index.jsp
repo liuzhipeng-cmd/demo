@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="layui-body">
+    <div class="layui-body" style="overflow: hidden">
         <!-- 内容主体区域 -->
         <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
             <ul class="layui-tab-title"></ul>

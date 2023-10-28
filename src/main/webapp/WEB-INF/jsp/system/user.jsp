@@ -41,14 +41,14 @@
 <div style="display: none" id="saveDialog">
     <form class="layui-form" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">账号</label>
+            <label class="layui-form-label">账号<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="userNameSave" name="userNameSave" placeholder="请输入账号" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">姓名<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="realNameSave" name="realNameSave" placeholder="请输入姓名" autocomplete="off"
                        class="layui-input">
@@ -106,14 +106,14 @@
     <form class="layui-form" action="">
         <input id="updateId" name="updateId" type="hidden" disabled="disabled">
         <div class="layui-form-item">
-            <label class="layui-form-label">账号</label>
+            <label class="layui-form-label">账号<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="userNameUpdate" name="userNameUpdate" placeholder="请输入账号" autocomplete="off"
                        class="layui-input" disabled="disabled">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">姓名<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="realNameUpdate" name="realNameUpdate" placeholder="请输入姓名" autocomplete="off"
                        class="layui-input">
@@ -265,7 +265,7 @@
                             var userGenderUpdate = $('#userGenderUpdate').val();
                             console.log(roleIdUpdate);
                             // 字段校验
-                            var validation = formValidation(userNameUpdate, "null", "null", realNameUpdate);
+                            var validation = formValidation(userNameUpdate, realNameUpdate);
                             if (!validation) {
                                 $.ajax({
                                     url: ctx + '/updateDataUser',

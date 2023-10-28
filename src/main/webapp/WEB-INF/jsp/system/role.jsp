@@ -32,7 +32,7 @@
 <div style="display: none" id="saveDialog">
     <form class="layui-form" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">角色名称</label>
+            <label class="layui-form-label">角色名称<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="roleNameSave" name="roleNameSave" placeholder="请输入角色名称" autocomplete="off"
                        class="layui-input">
@@ -71,7 +71,7 @@
     <form class="layui-form" action="">
         <input id="updateId" name="updateId" type="hidden" disabled="disabled">
         <div class="layui-form-item">
-            <label class="layui-form-label">角色名称</label>
+            <label class="layui-form-label">角色名称<i class="asterisk">*</i></label>
             <div class="layui-input-block">
                 <input type="text" id="roleNameUpdate" name="roleNameUpdate" placeholder="请输入角色名称"
                        autocomplete="off"
