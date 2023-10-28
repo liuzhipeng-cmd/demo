@@ -32,8 +32,10 @@
     </div>
     <div class="layui-row layui-col-space10 button-group">
         <div class="layui-form-item">
-            <button class="layui-btn layui-btn-radius layui-btn-normal" onclick="searchData()">查询</button>
-            <button class="layui-btn layui-btn-radius" onclick="saveData()">新增</button>
+            <c:if test="${userInfo.userName == 'admin'}">
+                <button class="layui-btn layui-btn-radius layui-btn-normal" onclick="searchData()">查询</button>
+                <button class="layui-btn layui-btn-radius" onclick="saveData()">新增</button>
+            </c:if>
         </div>
     </div>
 </div>
@@ -133,7 +135,8 @@
     <a class="layui-btn layui-btn-primary layui-border-green layui-btn-sm button-group-child" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-primary layui-border-red layui-btn-sm button-group-child" lay-event="del">删除</a>
     {{# if (d.isChildNode == 2) { }}
-        <a class="layui-btn layui-btn-primary layui-border-orange layui-btn-sm button-group-child" lay-event="isChild">子菜单</a>
+    <a class="layui-btn layui-btn-primary layui-border-orange layui-btn-sm button-group-child"
+       lay-event="isChild">子菜单</a>
     {{#  } }}
 </script>
 <script>
@@ -193,7 +196,13 @@
                             }
                         }
                     }
-                    , {title: '操作', width: 260, align: 'center', toolbar: '#dataMenuBarDemo', fixed: 'right'}
+                    <c:if test="${userInfo.userName == 'admin'}">, {
+                        title: '操作',
+                        width: 260,
+                        align: 'center',
+                        toolbar: '#dataMenuBarDemo',
+                        fixed: 'right'
+                    }</c:if>
                 ]]
             });
             //触发单元格工具事件

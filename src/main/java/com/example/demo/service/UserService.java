@@ -21,7 +21,7 @@ public interface UserService {
      * @param pojo
      * @return
      */
-    PageInfo<UserPojo> listUserInfoPage(UserPojo pojo);
+    PageInfo<UserPojo> listUserInfoPage(HttpServletRequest request, UserPojo pojo);
 
     /**
      * 保存数据

@@ -20,7 +20,15 @@ public interface UserDao {
     UserPojo getUser(String userName);
 
     /**
-     * 查询所有数据
+     * 查询所有数据(超级管理员)
+     *
+     * @param pojo
+     * @return
+     */
+    List<UserPojo> listUserInfoPageAdmin(UserPojo pojo);
+
+    /**
+     * 查询所有数据(除超级管理员外的用户)
      *
      * @param pojo
      * @return

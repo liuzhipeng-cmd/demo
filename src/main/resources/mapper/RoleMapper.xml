@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.dao.RoleDao">
-    <!--查询全部数据-->
-    <select id="listRoleInfoPage" resultType="com.example.demo.pojo.RolePojo">
+    <!--查询全部数据(超级管理员)-->
+    <select id="listRoleInfoPageAdmin" resultType="com.example.demo.pojo.RolePojo">
         SELECT r.id,
         r.role_name,
         r.remarks,
@@ -18,6 +18,30 @@
         LEFT JOIN user_info u ON r.creator = u.id
         LEFT JOIN user_info ui ON r.updator = ui.id
         WHERE r.is_del = 0
+        <if test="roleName != null and roleName != ''">
+            and role_name LIKE '%${roleName}%'
+        </if>
+        ORDER BY r.create_time DESC
+    </select>
+
+    <!--查询全部数据(除超级管理员外的角色)-->
+    <select id="listRoleInfoPage" resultType="com.example.demo.pojo.RolePojo">
+        SELECT r.id,
+        r.role_name,
+        r.remarks,
+        r.create_time,
+        r.update_time,
+        r.creator,
+        r.updator,
+        r.is_del,
+        u.real_name AS creatorName,
+        ui.real_name AS updatorName
+        FROM role_info r
+        LEFT JOIN user_info u ON r.creator = u.id
+        LEFT JOIN user_info ui ON r.updator = ui.id
+        left join user_role ur ON r.id = ur.role_id
+        left join user_info uf ON ur.user_id = uf.id
+        WHERE r.is_del = 0 and uf.user_name != 'admin'
         <if test="roleName != null and roleName != ''">
             and role_name LIKE '%${roleName}%'
         </if>
@@ -46,11 +70,21 @@
         VALUES (#{id}, #{roleName}, #{remarks}, #{createTime}, #{creator})
     </insert>
 
-    <!--查询所有的角色id与name-->
-    <select id="listRoleIdAndName" resultType="java.util.HashMap">
+    <!--查询所有的角色id与name(超级管理员)-->
+    <select id="listRoleIdAndNameAdmin" resultType="java.util.HashMap">
         SELECT id, role_name as roleName
         FROM role_info
         WHERE is_del = 0
+    </select>
+
+    <!--查询所有的角色id与name(除超级管理员外的角色)-->
+    <select id="listRoleIdAndName" resultType="java.util.HashMap">
+        SELECT r.id, r.role_name as roleName
+        FROM role_info r
+                 left join user_role ur on r.id = ur.role_id
+                 left join user_info u on ur.user_id = u.id
+        WHERE r.is_del = 0
+          and u.user_name != 'admin'
     </select>
 
     <!--通过角色id删除用户与角色关联表信息-->

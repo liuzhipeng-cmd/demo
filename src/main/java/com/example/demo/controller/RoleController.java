@@ -39,9 +39,9 @@ public class RoleController {
      */
     @RequestMapping("/listRoleInfoPage")
     @ResponseBody
-    public Map<String, Object> listRoleInfoPage(RolePojo pojo) {
+    public Map<String, Object> listRoleInfoPage(HttpServletRequest request, RolePojo pojo) {
 
-        PageInfo<RolePojo> page = roleService.listRoleInfoPage(pojo);
+        PageInfo<RolePojo> page = roleService.listRoleInfoPage(request,pojo);
 
         return new Result().Success(page.getTotal(), page.getList());
     }

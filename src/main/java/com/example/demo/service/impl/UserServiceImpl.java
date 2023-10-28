@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,11 +45,15 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public PageInfo<UserPojo> listUserInfoPage(UserPojo pojo) {
-
+    public PageInfo<UserPojo> listUserInfoPage(HttpServletRequest request, UserPojo pojo) {
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         PageHelper.startPage(pojo.getPage(), pojo.getLimit());
-
-        List<UserPojo> list = userDao.listUserInfoPage(pojo);
+        List<UserPojo> list = null;
+        if (ConstantUtils.ADMIN.equals(userPojo.getUserName())) {
+            list = userDao.listUserInfoPageAdmin(pojo);
+        } else {
+            list = userDao.listUserInfoPage(pojo);
+        }
 
         PageInfo<UserPojo> pageInfo = new PageInfo<>(list);
 

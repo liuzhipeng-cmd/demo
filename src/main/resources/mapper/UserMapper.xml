@@ -9,14 +9,31 @@
         where user_name = #{userName}
     </select>
 
-    <!--查询全部数据-->
-    <select id="listUserInfoPage" resultType="com.example.demo.pojo.UserPojo">
+    <!--查询所有数据(超级管理员)-->
+    <select id="listUserInfoPageAdmin" resultType="com.example.demo.pojo.UserPojo">
         SELECT
         u.id,u.user_name,u.real_name,u.user_password,u.user_birthday,u.user_phone,u.is_lock,u.password_times,u.multi_tenant_id,u.create_time,u.update_time,u.is_del,u.remark,u.creator,u.updator,r.id
         as roleId,r.role_name as roleName,u.user_gender
         FROM user_info u LEFT JOIN user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN role_info r ON
         ur.role_id=r.id AND r.is_del =0 WHERE
         u.is_del=0
+        <if test="realName != null and realName != ''">
+            and u.real_name LIKE '%${realName}%'
+        </if>
+        <if test="userName != null and userName != ''">
+            and u.user_name LIKE '%${userName}%'
+        </if>
+        ORDER BY u.create_time DESC
+    </select>
+
+    <!--查询所有数据(除超级管理员外的用户)-->
+    <select id="listUserInfoPage" resultType="com.example.demo.pojo.UserPojo">
+        SELECT
+        u.id,u.user_name,u.real_name,u.user_password,u.user_birthday,u.user_phone,u.is_lock,u.password_times,u.multi_tenant_id,u.create_time,u.update_time,u.is_del,u.remark,u.creator,u.updator,r.id
+        as roleId,r.role_name as roleName,u.user_gender
+        FROM user_info u LEFT JOIN user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN role_info r ON
+        ur.role_id=r.id AND r.is_del =0 WHERE
+        u.is_del=0 and u.user_name != 'admin'
         <if test="realName != null and realName != ''">
             and u.real_name LIKE '%${realName}%'
         </if>

@@ -11,7 +11,15 @@ import java.util.Map;
 public interface RoleDao {
 
     /**
-     * 分页查询
+     * 分页查询(超级管理员)
+     *
+     * @param pojo
+     * @return
+     */
+    List<RolePojo> listRoleInfoPageAdmin(RolePojo pojo);
+
+    /**
+     * 分页查询(除超级管理员外的角色)
      *
      * @param pojo
      * @return
@@ -43,7 +51,14 @@ public interface RoleDao {
     Integer saveDataRole(RolePojo pojo);
 
     /**
-     * 查询所有的角色id与name
+     * 查询所有的角色id与name(超级管理员)
+     *
+     * @return
+     */
+    List<Map<String, Object>> listRoleIdAndNameAdmin();
+
+    /**
+     * 查询所有的角色id与name(除超级管理员外的角色)
      *
      * @return
      */

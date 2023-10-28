@@ -33,11 +33,16 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public PageInfo<RolePojo> listRoleInfoPage(RolePojo pojo) {
-
+    public PageInfo<RolePojo> listRoleInfoPage(HttpServletRequest request, RolePojo pojo) {
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
         PageHelper.startPage(pojo.getPage(), pojo.getLimit());
-
-        List<RolePojo> list = roleDao.listRoleInfoPage(pojo);
+        List<RolePojo> list = null;
+        // 判断如果当前人是超级管理员则查出全部数据，否则不查超级管理员数据
+        if (ConstantUtils.ADMIN.equals(userPojo.getUserName())) {
+            list = roleDao.listRoleInfoPageAdmin(pojo);
+        } else {
+            list = roleDao.listRoleInfoPage(pojo);
+        }
         if (!CollectionUtils.isEmpty(list)) {
             for (int i = 0; i < list.size(); i++) {
                 String id = list.get(i).getId();
@@ -127,10 +132,15 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public List<Map<String, Object>> listRoleIdAndName() {
-
-        List<Map<String, Object>> list = roleDao.listRoleIdAndName();
-
+    public List<Map<String, Object>> listRoleIdAndName(HttpServletRequest request) {
+        UserPojo userPojo = (UserPojo) request.getSession().getAttribute(ConstantUtils.USER_INFO);
+        List<Map<String,Object>> list = null;
+        // 判断如果当前人是超级管理员则查出全部数据，否则不查超级管理员数据
+        if (ConstantUtils.ADMIN.equals(userPojo.getUserName())) {
+            list = roleDao.listRoleIdAndNameAdmin();
+        } else {
+            list = roleDao.listRoleIdAndName();
+        }
         return list;
     }
 

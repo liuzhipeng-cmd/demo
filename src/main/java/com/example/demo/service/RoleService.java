@@ -15,7 +15,7 @@ public interface RoleService {
      * @param pojo
      * @return
      */
-    PageInfo<RolePojo> listRoleInfoPage(RolePojo pojo);
+    PageInfo<RolePojo> listRoleInfoPage(HttpServletRequest request, RolePojo pojo);
 
     /**
      * 删除数据
@@ -50,6 +50,6 @@ public interface RoleService {
      *
      * @return
      */
-    List<Map<String, Object>> listRoleIdAndName();
+    List<Map<String, Object>> listRoleIdAndName(HttpServletRequest request);
 
 }

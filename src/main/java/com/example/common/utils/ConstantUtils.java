@@ -11,4 +11,9 @@ public interface ConstantUtils {
      * 账号信息
      */
     static final String USER_INFO = "userInfo";
+
+    /**
+     * 超级管理员账号
+     */
+    static final String ADMIN = "admin";
 }

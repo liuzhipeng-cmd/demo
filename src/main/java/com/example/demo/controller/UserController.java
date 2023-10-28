@@ -35,9 +35,9 @@ public class UserController {
     SysDicService sysDicService;
 
     @RequestMapping("/user")
-    public String jumpUser(ModelMap model) {
+    public String jumpUser(HttpServletRequest request, ModelMap model) {
         // 查询所有的角色id与name
-        List<Map<String, Object>> roleList = roleService.listRoleIdAndName();
+        List<Map<String, Object>> roleList = roleService.listRoleIdAndName(request);
         model.addAttribute("roleList", roleList);
         // 获取性别
         List<SysDicPojo> genderTypeList = sysDicService.getDictByCode("GENDER_TYPE");
@@ -53,9 +53,9 @@ public class UserController {
      */
     @RequestMapping("/listUserInfoPage")
     @ResponseBody
-    public Map<String, Object> listUserInfoPage(UserPojo pojo) {
+    public Map<String, Object> listUserInfoPage(HttpServletRequest request, UserPojo pojo) {
 
-        PageInfo<UserPojo> page = userService.listUserInfoPage(pojo);
+        PageInfo<UserPojo> page = userService.listUserInfoPage(request,pojo);
 
         return new Result().Success(page.getTotal(), page.getList());
     }
