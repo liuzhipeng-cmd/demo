@@ -1,10 +1,9 @@
-package com.example.demo.service;
+package com.example.demo.system.service;
 
-import com.example.demo.pojo.MenuPojo;
+import com.example.demo.system.pojo.MenuPojo;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.util.List;
 import java.util.Map;
 

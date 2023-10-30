@@ -1,11 +1,11 @@
-package com.example.demo.service.impl;
+package com.example.demo.system.service.impl;
 
 import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DateTimeUtils;
-import com.example.demo.dao.SysDicDao;
-import com.example.demo.pojo.SysDicPojo;
-import com.example.demo.pojo.UserPojo;
-import com.example.demo.service.SysDicService;
+import com.example.demo.system.dao.SysDicDao;
+import com.example.demo.system.pojo.SysDicPojo;
+import com.example.demo.system.pojo.UserPojo;
+import com.example.demo.system.service.SysDicService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;

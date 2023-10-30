@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.example.demo.system.dao;
 
-import com.example.demo.pojo.SysDicPojo;
+import com.example.demo.system.pojo.SysDicPojo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

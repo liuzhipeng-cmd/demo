@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package com.example.demo.system.dao;
 
-import com.example.demo.pojo.MenuPojo;
+import com.example.demo.system.pojo.MenuPojo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

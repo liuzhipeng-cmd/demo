@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.system.service;
 
-import com.example.demo.pojo.RolePojo;
+import com.example.demo.system.pojo.RolePojo;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;

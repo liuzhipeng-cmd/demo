@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.dao.UserDao">
+<mapper namespace="com.example.demo.system.dao.UserDao">
     <!--根据账号查询数据-->
-    <select id="getUser" resultType="com.example.demo.pojo.UserPojo">
+    <select id="getUser" resultType="com.example.demo.system.pojo.UserPojo">
         select *
         from sys_user_info
         where user_name = #{userName}
     </select>
 
     <!--查询所有数据(超级管理员)-->
-    <select id="listUserInfoPageAdmin" resultType="com.example.demo.pojo.UserPojo">
+    <select id="listUserInfoPageAdmin" resultType="com.example.demo.system.pojo.UserPojo">
         SELECT
         u.id,u.user_name,u.real_name,u.user_password,u.user_birthday,u.user_phone,u.is_lock,u.password_times,u.multi_tenant_id,u.create_time,u.update_time,u.is_del,u.remark,u.creator,u.updator,r.id
         as roleId,r.role_name as roleName,u.user_gender
@@ -27,7 +27,7 @@
     </select>
 
     <!--查询所有数据(除超级管理员外的用户)-->
-    <select id="listUserInfoPage" resultType="com.example.demo.pojo.UserPojo">
+    <select id="listUserInfoPage" resultType="com.example.demo.system.pojo.UserPojo">
         SELECT
         u.id,u.user_name,u.real_name,u.user_password,u.user_birthday,u.user_phone,u.is_lock,u.password_times,u.multi_tenant_id,u.create_time,u.update_time,u.is_del,u.remark,u.creator,u.updator,r.id
         as roleId,r.role_name as roleName,u.user_gender
@@ -44,7 +44,7 @@
     </select>
 
     <!--保存数据-->
-    <insert id="saveDataUser" parameterType="com.example.demo.pojo.UserPojo">
+    <insert id="saveDataUser" parameterType="com.example.demo.system.pojo.UserPojo">
         INSERT INTO sys_user_info(id, user_name, real_name, user_password, user_birthday, user_phone, password_times,
                               create_time, remark, creator, user_gender)
         VALUES (#{id}, #{userName}, #{realName}, #{userPassword}, #{userBirthday}, #{userPhone}, 3, #{createTime},
@@ -66,7 +66,7 @@
     </update>
 
     <!--更新数据-->
-    <update id="updateDataUser" parameterType="com.example.demo.pojo.UserPojo">
+    <update id="updateDataUser" parameterType="com.example.demo.system.pojo.UserPojo">
         UPDATE sys_user_info
         SET real_name     = #{realName},
             user_birthday = #{userBirthday},
@@ -79,13 +79,13 @@
     </update>
 
     <!--将数据保存到用户与角色关联表-->
-    <insert id="saveUserRole" parameterType="com.example.demo.pojo.UserRolePojo">
+    <insert id="saveUserRole" parameterType="com.example.demo.system.pojo.UserRolePojo">
         INSERT INTO sys_user_role(role_id, user_id, create_time, creator)
         VALUES (#{roleId}, #{userId}, #{createTime}, #{creator})
     </insert>
 
     <!--将用户与角色关联表的数据更新通过用户id-->
-    <update id="updateUserRole" parameterType="com.example.demo.pojo.UserRolePojo">
+    <update id="updateUserRole" parameterType="com.example.demo.system.pojo.UserRolePojo">
         UPDATE sys_user_role
         SET role_id     = #{roleId},
             update_time = #{updateTime},
@@ -102,7 +102,7 @@
     </update>
 
     <!--通过用户id查询用户与角色关联表数据-->
-    <select id="getUserRoleByUserId" resultType="com.example.demo.pojo.UserRolePojo">
+    <select id="getUserRoleByUserId" resultType="com.example.demo.system.pojo.UserRolePojo">
         SELECT *
         FROM sys_user_role
         WHERE user_id = #{id}

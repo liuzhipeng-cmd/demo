@@ -1,8 +1,8 @@
-package com.example.demo.controller;
+package com.example.demo.system.controller;
 
 import com.example.common.utils.Result;
-import com.example.demo.pojo.SysDicPojo;
-import com.example.demo.service.SysDicService;
+import com.example.demo.system.pojo.SysDicPojo;
+import com.example.demo.system.service.SysDicService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.system.service;
 
-import com.example.demo.pojo.SysDicPojo;
+import com.example.demo.system.pojo.SysDicPojo;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;

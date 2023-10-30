@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.dao.SysDicDao">
+<mapper namespace="com.example.demo.system.dao.SysDicDao">
 
     <!--查询所有字典-->
-    <select id="listSysDicPage" resultType="com.example.demo.pojo.SysDicPojo">
+    <select id="listSysDicPage" resultType="com.example.demo.system.pojo.SysDicPojo">
         SELECT s.id,
         s.dic_code,
         s.dic_name,
@@ -40,7 +40,7 @@
     </update>
 
     <!--更新数据-->
-    <update id="updateDataSysDic" parameterType="com.example.demo.pojo.SysDicPojo">
+    <update id="updateDataSysDic" parameterType="com.example.demo.system.pojo.SysDicPojo">
         UPDATE sys_dic
         SET dic_name    = #{dicName},
             dic_code    = #{dicCode},
@@ -52,13 +52,13 @@
     </update>
 
     <!--保存数据-->
-    <insert id="saveDataSysDic" parameterType="com.example.demo.pojo.SysDicPojo">
+    <insert id="saveDataSysDic" parameterType="com.example.demo.system.pojo.SysDicPojo">
         INSERT INTO sys_dic(id, dic_code, dic_name, dic_order, dic_type, create_time, creator, pid)
         VALUES (#{id}, #{dicCode}, #{dicName}, #{dicOrder}, #{dicType}, #{createTime}, #{creator}, #{pid})
     </insert>
 
     <!--查询所有字典(子节点)-->
-    <select id="listSysDicChildPage" resultType="com.example.demo.pojo.SysDicPojo">
+    <select id="listSysDicChildPage" resultType="com.example.demo.system.pojo.SysDicPojo">
         SELECT s.id,
         s.dic_code,
         s.dic_name,
@@ -84,7 +84,7 @@
     </select>
 
     <!--通过数据字典类型查询该类型下的数据-->
-    <select id="getDictByCode" resultType="com.example.demo.pojo.SysDicPojo">
+    <select id="getDictByCode" resultType="com.example.demo.system.pojo.SysDicPojo">
         SELECT dic_code, dic_name
         FROM sys_dic
         WHERE pid in (SELECT id FROM sys_dic WHERE dic_type = 'gender_type')

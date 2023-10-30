@@ -1,11 +1,11 @@
-package com.example.demo.controller;
+package com.example.demo.system.controller;
 
 import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DesUtils;
-import com.example.demo.pojo.UserPojo;
-import com.example.demo.service.LoginService;
-import com.example.demo.service.MenuService;
-import com.example.demo.service.UserService;
+import com.example.demo.system.pojo.UserPojo;
+import com.example.demo.system.service.LoginService;
+import com.example.demo.system.service.MenuService;
+import com.example.demo.system.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

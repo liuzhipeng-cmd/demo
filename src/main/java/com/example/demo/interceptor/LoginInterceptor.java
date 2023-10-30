@@ -1,7 +1,7 @@
 package com.example.demo.interceptor;
 
 import com.example.common.utils.ConstantUtils;
-import com.example.demo.pojo.UserPojo;
+import com.example.demo.system.pojo.UserPojo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

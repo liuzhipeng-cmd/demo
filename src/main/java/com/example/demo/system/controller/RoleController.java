@@ -1,22 +1,16 @@
-package com.example.demo.controller;
+package com.example.demo.system.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.example.common.utils.GuidUtils;
 import com.example.common.utils.Result;
-import com.example.demo.pojo.RolePojo;
-import com.example.demo.service.RoleService;
+import com.example.demo.system.pojo.RolePojo;
+import com.example.demo.system.service.RoleService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 @Controller

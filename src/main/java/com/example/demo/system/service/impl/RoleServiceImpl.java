@@ -1,14 +1,13 @@
-package com.example.demo.service.impl;
+package com.example.demo.system.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DateTimeUtils;
 import com.example.common.utils.GuidUtils;
-import com.example.demo.dao.RoleDao;
-import com.example.demo.pojo.RoleMenuPojo;
-import com.example.demo.pojo.RolePojo;
-import com.example.demo.pojo.UserPojo;
-import com.example.demo.service.RoleService;
+import com.example.demo.system.dao.RoleDao;
+import com.example.demo.system.pojo.RoleMenuPojo;
+import com.example.demo.system.pojo.RolePojo;
+import com.example.demo.system.pojo.UserPojo;
+import com.example.demo.system.service.RoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;

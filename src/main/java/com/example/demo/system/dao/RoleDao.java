@@ -1,7 +1,7 @@
-package com.example.demo.dao;
+package com.example.demo.system.dao;
 
-import com.example.demo.pojo.RoleMenuPojo;
-import com.example.demo.pojo.RolePojo;
+import com.example.demo.system.pojo.RoleMenuPojo;
+import com.example.demo.system.pojo.RolePojo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

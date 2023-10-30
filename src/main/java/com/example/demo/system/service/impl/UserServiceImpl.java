@@ -1,13 +1,13 @@
-package com.example.demo.service.impl;
+package com.example.demo.system.service.impl;
 
 import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.DateTimeUtils;
 import com.example.common.utils.DesUtils;
 import com.example.common.utils.GuidUtils;
-import com.example.demo.dao.UserDao;
-import com.example.demo.pojo.UserPojo;
-import com.example.demo.pojo.UserRolePojo;
-import com.example.demo.service.UserService;
+import com.example.demo.system.dao.UserDao;
+import com.example.demo.system.pojo.UserPojo;
+import com.example.demo.system.pojo.UserRolePojo;
+import com.example.demo.system.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

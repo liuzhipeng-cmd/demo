@@ -1,8 +1,8 @@
-package com.example.demo.dao;
+package com.example.demo.system.dao;
 
 
-import com.example.demo.pojo.UserPojo;
-import com.example.demo.pojo.UserRolePojo;
+import com.example.demo.system.pojo.UserPojo;
+import com.example.demo.system.pojo.UserRolePojo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

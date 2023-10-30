@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.dao.RoleDao">
+<mapper namespace="com.example.demo.system.dao.RoleDao">
     <!--查询全部数据(超级管理员)-->
-    <select id="listRoleInfoPageAdmin" resultType="com.example.demo.pojo.RolePojo">
+    <select id="listRoleInfoPageAdmin" resultType="com.example.demo.system.pojo.RolePojo">
         SELECT r.id,
         r.role_name,
         r.remarks,
@@ -26,7 +26,7 @@
     </select>
 
     <!--查询全部数据(除超级管理员外的角色)-->
-    <select id="listRoleInfoPage" resultType="com.example.demo.pojo.RolePojo">
+    <select id="listRoleInfoPage" resultType="com.example.demo.system.pojo.RolePojo">
         SELECT r.id,
         r.role_name,
         r.remarks,
@@ -58,7 +58,7 @@
     </update>
 
     <!--更新数据-->
-    <update id="updateDataRole" parameterType="com.example.demo.pojo.RolePojo">
+    <update id="updateDataRole" parameterType="com.example.demo.system.pojo.RolePojo">
         UPDATE sys_role_info
         SET role_name   = #{roleName},
             remarks     = #{remarks},
@@ -67,7 +67,7 @@
         WHERE id = #{id}
     </update>
 
-    <insert id="saveDataRole" parameterType="com.example.demo.pojo.RolePojo">
+    <insert id="saveDataRole" parameterType="com.example.demo.system.pojo.RolePojo">
         INSERT INTO sys_role_info(id, role_name, remarks, create_time, creator)
         VALUES (#{id}, #{roleName}, #{remarks}, #{createTime}, #{creator})
     </insert>
@@ -97,7 +97,7 @@
     </update>
 
     <!--将角色id与菜单id保存到数据库中-->
-    <insert id="saveRoleMenu" parameterType="com.example.demo.pojo.RoleMenuPojo">
+    <insert id="saveRoleMenu" parameterType="com.example.demo.system.pojo.RoleMenuPojo">
         INSERT INTO sys_role_menu(role_id, menu_id, create_time, creator)
         VALUES (#{roleId}, #{menuId}, #{createTime}, #{creator})
     </insert>

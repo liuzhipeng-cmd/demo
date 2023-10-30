@@ -1,12 +1,12 @@
-package com.example.demo.controller;
+package com.example.demo.system.controller;
 
 import com.example.common.utils.ConstantUtils;
 import com.example.common.utils.Result;
-import com.example.demo.pojo.SysDicPojo;
-import com.example.demo.pojo.UserPojo;
-import com.example.demo.service.RoleService;
-import com.example.demo.service.SysDicService;
-import com.example.demo.service.UserService;
+import com.example.demo.system.pojo.SysDicPojo;
+import com.example.demo.system.pojo.UserPojo;
+import com.example.demo.system.service.RoleService;
+import com.example.demo.system.service.SysDicService;
+import com.example.demo.system.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
