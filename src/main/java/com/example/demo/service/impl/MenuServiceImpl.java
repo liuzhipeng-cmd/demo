@@ -156,18 +156,32 @@ public class MenuServiceImpl implements MenuService {
      */
     @Override
     public List<Map<String, Object>> getMenuRoleList(String userName) {
-        // 获取主菜单
-        List<Map<String, Object>> list = menuDao.getHomeMenuRoleList(userName);
-        // 判断主菜单是否有值
-        if (!CollectionUtils.isEmpty(list)) {
-            for (int i = 0; i < list.size(); i++) {
-                String pid = String.valueOf(list.get(i).get("id"));
-                // 通过主菜单id查询对应的子菜单
-                List<Map<String, Object>> childList = menuDao.getChildMenuRoleList(pid,userName);
-                list.get(i).put("children", childList);
+        List<Map<String, Object>> list = null;
+        if (ConstantUtils.ADMIN.equals(userName)) {
+            // 获取主菜单(超级管理员)
+            list = menuDao.getHomeMenuRoleAdminList();
+            // 判断主菜单是否有值
+            if (!CollectionUtils.isEmpty(list)) {
+                for (int i = 0; i < list.size(); i++) {
+                    String pid = String.valueOf(list.get(i).get("id"));
+                    // 通过主菜单id查询对应的子菜单(超级管理员)
+                    List<Map<String, Object>> childList = menuDao.getChildMenuRoleAdminList(pid);
+                    list.get(i).put("children", childList);
+                }
+            }
+        } else {
+            // 获取主菜单
+            list = menuDao.getHomeMenuRoleList(userName);
+            // 判断主菜单是否有值
+            if (!CollectionUtils.isEmpty(list)) {
+                for (int i = 0; i < list.size(); i++) {
+                    String pid = String.valueOf(list.get(i).get("id"));
+                    // 通过主菜单id查询对应的子菜单
+                    List<Map<String, Object>> childList = menuDao.getChildMenuRoleList(pid, userName);
+                    list.get(i).put("children", childList);
+                }
             }
         }
-
         return list;
     }
 }

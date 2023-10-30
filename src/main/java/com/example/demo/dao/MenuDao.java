@@ -72,7 +72,7 @@ public interface MenuDao {
      * @param pid
      * @return
      */
-    List<Map<String, Object>> getChildMenuList(@Param("pid") String pid,@Param("userName") String userName);
+    List<Map<String, Object>> getChildMenuList(@Param("pid") String pid, @Param("userName") String userName);
 
     /**
      * 获取主菜单
@@ -87,5 +87,20 @@ public interface MenuDao {
      * @param pid
      * @return
      */
-    List<Map<String, Object>> getChildMenuRoleList(@Param("pid") String pid,@Param("userName") String userName);
+    List<Map<String, Object>> getChildMenuRoleList(@Param("pid") String pid, @Param("userName") String userName);
+
+    /**
+     * 获取主菜单(超级管理员)
+     *
+     * @return
+     */
+    List<Map<String, Object>> getHomeMenuRoleAdminList();
+
+    /**
+     * 通过主菜单id查询对应的子菜单(超级管理员)
+     *
+     * @param pid
+     * @return
+     */
+    List<Map<String, Object>> getChildMenuRoleAdminList(String pid);
 }
