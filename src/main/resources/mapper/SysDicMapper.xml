@@ -87,7 +87,7 @@
     <select id="getDictByCode" resultType="com.example.demo.system.pojo.SysDicPojo">
         SELECT dic_code, dic_name
         FROM sys_dic
-        WHERE pid in (SELECT id FROM sys_dic WHERE dic_type = 'gender_type')
+        WHERE pid in (SELECT id FROM sys_dic WHERE dic_type = #{dicType})
         ORDER BY dic_order ASC
     </select>
 </mapper>
