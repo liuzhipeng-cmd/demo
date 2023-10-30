@@ -5,7 +5,7 @@
     <!--根据账号查询数据-->
     <select id="getUser" resultType="com.example.demo.pojo.UserPojo">
         select *
-        from user_info
+        from sys_user_info
         where user_name = #{userName}
     </select>
 
@@ -14,7 +14,7 @@
         SELECT
         u.id,u.user_name,u.real_name,u.user_password,u.user_birthday,u.user_phone,u.is_lock,u.password_times,u.multi_tenant_id,u.create_time,u.update_time,u.is_del,u.remark,u.creator,u.updator,r.id
         as roleId,r.role_name as roleName,u.user_gender
-        FROM user_info u LEFT JOIN user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN role_info r ON
+        FROM sys_user_info u LEFT JOIN sys_user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN sys_role_info r ON
         ur.role_id=r.id AND r.is_del =0 WHERE
         u.is_del=0
         <if test="realName != null and realName != ''">
@@ -31,7 +31,7 @@
         SELECT
         u.id,u.user_name,u.real_name,u.user_password,u.user_birthday,u.user_phone,u.is_lock,u.password_times,u.multi_tenant_id,u.create_time,u.update_time,u.is_del,u.remark,u.creator,u.updator,r.id
         as roleId,r.role_name as roleName,u.user_gender
-        FROM user_info u LEFT JOIN user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN role_info r ON
+        FROM sys_user_info u LEFT JOIN sys_user_role ur ON u.id=ur.user_id AND ur.is_del = 0 LEFT JOIN sys_role_info r ON
         ur.role_id=r.id AND r.is_del =0 WHERE
         u.is_del=0 and u.user_name != 'admin'
         <if test="realName != null and realName != ''">
@@ -45,7 +45,7 @@
 
     <!--保存数据-->
     <insert id="saveDataUser" parameterType="com.example.demo.pojo.UserPojo">
-        INSERT INTO user_info(id, user_name, real_name, user_password, user_birthday, user_phone, password_times,
+        INSERT INTO sys_user_info(id, user_name, real_name, user_password, user_birthday, user_phone, password_times,
                               create_time, remark, creator, user_gender)
         VALUES (#{id}, #{userName}, #{realName}, #{userPassword}, #{userBirthday}, #{userPhone}, 3, #{createTime},
                 #{remark}, #{creator}, #{userGender})
@@ -53,21 +53,21 @@
 
     <!--更新账号状态-->
     <update id="updateUserStatus">
-        UPDATE user_info
+        UPDATE sys_user_info
         SET is_lock = #{type}
         WHERE id = #{id}
     </update>
 
     <!--删除数据-->
     <update id="deleteUser">
-        UPDATE user_info
+        UPDATE sys_user_info
         SET is_del = 1
         WHERE id = #{id}
     </update>
 
     <!--更新数据-->
     <update id="updateDataUser" parameterType="com.example.demo.pojo.UserPojo">
-        UPDATE user_info
+        UPDATE sys_user_info
         SET real_name     = #{realName},
             user_birthday = #{userBirthday},
             user_gender   = #{userGender},
@@ -80,13 +80,13 @@
 
     <!--将数据保存到用户与角色关联表-->
     <insert id="saveUserRole" parameterType="com.example.demo.pojo.UserRolePojo">
-        INSERT INTO user_role(role_id, user_id, create_time, creator)
+        INSERT INTO sys_user_role(role_id, user_id, create_time, creator)
         VALUES (#{roleId}, #{userId}, #{createTime}, #{creator})
     </insert>
 
     <!--将用户与角色关联表的数据更新通过用户id-->
     <update id="updateUserRole" parameterType="com.example.demo.pojo.UserRolePojo">
-        UPDATE user_role
+        UPDATE sys_user_role
         SET role_id     = #{roleId},
             update_time = #{updateTime},
             updator     = #{updator}
@@ -96,7 +96,7 @@
 
     <!--通过用户id删除用户与角色关联表信息-->
     <update id="deleteUserRole">
-        UPDATE user_role
+        UPDATE sys_user_role
         SET is_del = 1
         WHERE user_id = #{id}
     </update>
@@ -104,13 +104,13 @@
     <!--通过用户id查询用户与角色关联表数据-->
     <select id="getUserRoleByUserId" resultType="com.example.demo.pojo.UserRolePojo">
         SELECT *
-        FROM user_role
+        FROM sys_user_role
         WHERE user_id = #{id}
     </select>
 
     <!--修改密码-->
     <update id="updatePassword">
-        UPDATE user_info
+        UPDATE sys_user_info
         SET user_password = #{encryptPassword}
         WHERE user_name = #{userName}
     </update>

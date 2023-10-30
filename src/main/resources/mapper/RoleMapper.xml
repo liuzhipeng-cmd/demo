@@ -14,13 +14,14 @@
         r.is_del,
         u.real_name AS creatorName,
         ui.real_name AS updatorName
-        FROM role_info r
-        LEFT JOIN user_info u ON r.creator = u.id
-        LEFT JOIN user_info ui ON r.updator = ui.id
+        FROM sys_role_info r
+        LEFT JOIN sys_user_info u ON r.creator = u.id
+        LEFT JOIN sys_user_info ui ON r.updator = ui.id
         WHERE r.is_del = 0
         <if test="roleName != null and roleName != ''">
             and role_name LIKE '%${roleName}%'
         </if>
+        GROUP BY r.id
         ORDER BY r.create_time DESC
     </select>
 
@@ -36,28 +37,29 @@
         r.is_del,
         u.real_name AS creatorName,
         ui.real_name AS updatorName
-        FROM role_info r
-        LEFT JOIN user_info u ON r.creator = u.id
-        LEFT JOIN user_info ui ON r.updator = ui.id
-        left join user_role ur ON r.id = ur.role_id
-        left join user_info uf ON ur.user_id = uf.id
+        FROM sys_role_info r
+        LEFT JOIN sys_user_info u ON r.creator = u.id
+        LEFT JOIN sys_user_info ui ON r.updator = ui.id
+        left join sys_user_role ur ON r.id = ur.role_id
+        left join sys_user_info uf ON ur.user_id = uf.id
         WHERE r.is_del = 0 and uf.user_name != 'admin'
         <if test="roleName != null and roleName != ''">
             and role_name LIKE '%${roleName}%'
         </if>
+        GROUP BY r.id
         ORDER BY r.create_time DESC
     </select>
 
     <!--删除数据-->
     <update id="deleteRole">
-        UPDATE role_info
+        UPDATE sys_role_info
         SET is_del = 1
         WHERE id = #{id}
     </update>
 
     <!--更新数据-->
     <update id="updateDataRole" parameterType="com.example.demo.pojo.RolePojo">
-        UPDATE role_info
+        UPDATE sys_role_info
         SET role_name   = #{roleName},
             remarks     = #{remarks},
             update_time = #{updateTime},
@@ -66,48 +68,48 @@
     </update>
 
     <insert id="saveDataRole" parameterType="com.example.demo.pojo.RolePojo">
-        INSERT INTO role_info(id, role_name, remarks, create_time, creator)
+        INSERT INTO sys_role_info(id, role_name, remarks, create_time, creator)
         VALUES (#{id}, #{roleName}, #{remarks}, #{createTime}, #{creator})
     </insert>
 
     <!--查询所有的角色id与name(超级管理员)-->
     <select id="listRoleIdAndNameAdmin" resultType="java.util.HashMap">
         SELECT id, role_name as roleName
-        FROM role_info
+        FROM sys_role_info
         WHERE is_del = 0
     </select>
 
     <!--查询所有的角色id与name(除超级管理员外的角色)-->
     <select id="listRoleIdAndName" resultType="java.util.HashMap">
         SELECT r.id, r.role_name as roleName
-        FROM role_info r
-                 left join user_role ur on r.id = ur.role_id
-                 left join user_info u on ur.user_id = u.id
+        FROM sys_role_info r
+                 left join sys_user_role ur on r.id = ur.role_id
+                 left join sys_user_info u on ur.user_id = u.id
         WHERE r.is_del = 0
           and u.user_name != 'admin'
     </select>
 
     <!--通过角色id删除用户与角色关联表信息-->
     <update id="deleteUserRole">
-        UPDATE user_role
+        UPDATE sys_user_role
         SET is_del = 1
         WHERE role_id = #{id}
     </update>
 
     <!--将角色id与菜单id保存到数据库中-->
     <insert id="saveRoleMenu" parameterType="com.example.demo.pojo.RoleMenuPojo">
-        INSERT INTO role_menu(role_id, menu_id, create_time, creator)
+        INSERT INTO sys_role_menu(role_id, menu_id, create_time, creator)
         VALUES (#{roleId}, #{menuId}, #{createTime}, #{creator})
     </insert>
 
     <!--通过角色id查询菜单id-->
     <select id="listRoleMenuId" resultType="java.lang.Integer">
-        SELECT r.menu_id as menuId FROM role_menu r LEFT JOIN menu_info m ON r.menu_id = m.id WHERE m.menu_action != '' and r.role_id = #{roleId} AND r.is_del = 0
+        SELECT r.menu_id as menuId FROM sys_role_menu r LEFT JOIN sys_menu_info m ON r.menu_id = m.id WHERE m.menu_action != '' and r.role_id = #{roleId} AND r.is_del = 0
     </select>
 
     <!--通过角色id清空之前的配置的菜单-->
     <update id="deleteRoleMenu">
-        UPDATE role_menu
+        UPDATE sys_role_menu
         SET is_del = 1
         where role_id = #{roleId}
     </update>

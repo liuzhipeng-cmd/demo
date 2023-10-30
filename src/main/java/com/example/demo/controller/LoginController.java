@@ -87,6 +87,11 @@ public class LoginController {
             model.addAttribute("errorText", "账号错误！");
             return "redirect:/";
         } else {
+            int isLock = user.getIsLock();
+            if (isLock == 1) {
+                model.addAttribute("errorText", "账号已锁定！");
+                return "redirect:/";
+            }
             // 数据库查询出来的密码
             String userPasswordDatabase = user.getUserPassword();
             // 对密码进行解密
