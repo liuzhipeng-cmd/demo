@@ -257,7 +257,7 @@
                             var userGenderUpdate = $('#userGenderUpdate').val();
                             console.log(roleIdUpdate);
                             // 字段校验
-                            var validation = formValidation(userNameUpdate, realNameUpdate);
+                            var validation = formValidation(userNameUpdate, realNameUpdate,userPhoneUpdate);
                             if (!validation) {
                                 $.ajax({
                                     url: ctx + '/updateDataUser',
@@ -312,7 +312,7 @@
                 var roleIdSave = $('#roleIdSave').val();
                 var userGenderSave = $('#userGenderSave').val();
                 // 字段校验
-                var validation = formValidation(userNameSave, realNameSave);
+                var validation = formValidation(userNameSave, realNameSave,userPhoneSave);
                 if (!validation) {
                     $.ajax({
                         url: ctx + '/saveDataUser',
@@ -353,7 +353,7 @@
     }
 
     // 校验参数
-    function formValidation(userName, realName) {
+    function formValidation(userName, realName,userPhone) {
         var flag = false;
         if (!userName) { // 账号
             flag = true;
@@ -364,6 +364,14 @@
             flag = true;
             layer.alert("姓名不能为空");
             return flag;
+        }
+        if (userPhone) {
+            var phoneFlag =  verifyPhoneNumber(userPhone);
+            if (!phoneFlag) {
+                flag = true;
+                layer.alert("手机号格式不正确");
+                return flag;
+            }
         }
 
         return flag;
