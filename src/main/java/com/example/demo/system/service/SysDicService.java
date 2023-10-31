@@ -57,4 +57,13 @@ public interface SysDicService {
      * @return
      */
     List<SysDicPojo> getDictByCode(String genderType);
+
+    /**
+     * 根据字典类型与值获取名称
+     *
+     * @param data
+     * @param type
+     * @return
+     */
+    String getDicName(String data, String type);
 }

@@ -122,4 +122,20 @@ public class SysDicController {
 
         return new Result().Success(page.getTotal(), page.getList());
     }
+
+    /**
+     * 根据字典类型与值获取名称
+     *
+     * @param data
+     * @param type
+     * @return
+     */
+    @RequestMapping(value = "/getDicName", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> getDicName(String data, String type) {
+
+        String dicName = sysDicService.getDicName(data, type);
+
+        return new Result().success(dicName);
+    }
 }

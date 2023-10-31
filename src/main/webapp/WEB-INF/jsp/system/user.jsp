@@ -203,15 +203,7 @@
                     {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', align: "center"}
                     , {field: 'userName', title: '账号', width: 120, align: "center"}
                     , {field: 'realName', title: '真实姓名', width: 100, align: "center"}
-                    , {field: 'userGender', title: '性别', width: 80, align: "center",templet: function (d) {
-                        if (d.userGender == 1) {
-                            return '男';
-                        } else if (d.userGender == 2) {
-                            return '女';
-                        } else {
-                            return '未知';
-                        }
-                        }}
+                    , {field: 'userGender', title: '性别', width: 80, align: "center",templet: "<span>{{dataDictionaryEcho(d.userGender,'GENDER_TYPE')}}</span>"}
                     , {field: 'userBirthday', title: '生日', width: 100, align: "center"}
                     , {field: 'userPhone', title: '手机号', width: 100, align: "center"}
                     , {field: 'roleName', title: '角色名称', width: 120, align: "center"}

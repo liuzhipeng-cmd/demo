@@ -90,4 +90,9 @@
         WHERE pid in (SELECT id FROM sys_dic WHERE dic_type = #{dicType})
         ORDER BY dic_order ASC
     </select>
+
+    <!--根据字典类型与值获取名称-->
+    <select id="getDicName" resultType="java.lang.String">
+        SELECT dic_name FROM sys_dic WHERE pid in (SELECT id FROM sys_dic WHERE dic_type = #{type}) AND dic_code = #{data}
+    </select>
 </mapper>

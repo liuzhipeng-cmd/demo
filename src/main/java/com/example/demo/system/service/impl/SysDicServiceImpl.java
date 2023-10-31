@@ -122,4 +122,19 @@ public class SysDicServiceImpl implements SysDicService {
 
         return list;
     }
+
+    /**
+     * 根据字典类型与值获取名称
+     *
+     * @param data
+     * @param type
+     * @return
+     */
+    @Override
+    public String getDicName(String data, String type) {
+
+        String dicName = sysDicDao.getDicName(data, type);
+
+        return dicName;
+    }
 }

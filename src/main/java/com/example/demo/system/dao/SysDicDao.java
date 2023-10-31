@@ -2,6 +2,7 @@ package com.example.demo.system.dao;
 
 import com.example.demo.system.pojo.SysDicPojo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -55,4 +56,12 @@ public interface SysDicDao {
      * @return
      */
     List<SysDicPojo> getDictByCode(String dicType);
+
+    /**
+     * 根据字典类型与值获取名称
+     * @param data
+     * @param type
+     * @return
+     */
+    String getDicName(@Param("data") String data, @Param("type") String type);
 }
