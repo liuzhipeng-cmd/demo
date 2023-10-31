@@ -199,6 +199,7 @@
                     }
                     , {field: 'menuOrder', title: '显示顺序', width: 120, align: "center"}
                     , {field: 'menuRemarks', title: '菜单备注', width: 150, align: "center"}
+                    <c:if test="${userInfo.userName == 'admin'}">
                     , {
                         field: 'menuStatus', title: '菜单状态', width: 120, align: "center", templet: function (d) {
                             if (d.menuStatus == 1) {
@@ -208,7 +209,7 @@
                             }
                         }
                     }
-                    <c:if test="${userInfo.userName == 'admin'}">, {
+                    , {
                         title: '操作',
                         width: 260,
                         align: 'center',
