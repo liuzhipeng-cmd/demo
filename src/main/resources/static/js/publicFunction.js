@@ -17,9 +17,6 @@ function dataDictionaryEcho(data, type) {
         data: {
             data: data,
             type: type
-        },
-        success: function (res) {
-            dicNameValue = res.data;
         }
     })
     return dicNameValue.responseJSON.data;
