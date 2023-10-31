@@ -11,13 +11,8 @@
         r.update_time,
         r.creator,
         r.updator,
-        r.is_del,
-        u.real_name AS creatorName,
-        ui.real_name AS updatorName
-        FROM sys_role_info r
-        LEFT JOIN sys_user_info u ON r.creator = u.id
-        LEFT JOIN sys_user_info ui ON r.updator = ui.id
-        WHERE r.is_del = 0
+        r.is_del
+        FROM sys_role_info r WHERE r.is_del = 0
         <if test="roleName != null and roleName != ''">
             and role_name LIKE '%${roleName}%'
         </if>
@@ -34,12 +29,8 @@
         r.update_time,
         r.creator,
         r.updator,
-        r.is_del,
-        u.real_name AS creatorName,
-        ui.real_name AS updatorName
+        r.is_del
         FROM sys_role_info r
-        LEFT JOIN sys_user_info u ON r.creator = u.id
-        LEFT JOIN sys_user_info ui ON r.updator = ui.id
         left join sys_user_role ur ON r.id = ur.role_id
         left join sys_user_info uf ON ur.user_id = uf.id
         WHERE r.is_del = 0 and uf.user_name != 'admin'

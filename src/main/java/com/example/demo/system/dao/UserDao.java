@@ -108,4 +108,12 @@ public interface UserDao {
      * @return
      */
     Integer updatePassword(@Param("userName") String userName, @Param("encryptPassword") String encryptPassword);
+
+    /**
+     * 通过id查询对应的姓名
+     *
+     * @param id
+     * @return
+     */
+    String getRealName(String id);
 }

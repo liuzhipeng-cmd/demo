@@ -148,8 +148,20 @@
                     {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', align: "center"}
                     , {field: 'menuName', title: '菜单名称', width: 120, align: "center"}
                     , {field: 'menuAction', title: '菜单动作', width: 120, align: "center"}
-                    , {field: 'creatorName', title: '创建人', width: 120, align: "center"}
-                    , {field: 'updatorName', title: '更新人', width: 120, align: "center"}
+                    , {
+                        field: 'creator',
+                        title: '创建人',
+                        width: 120,
+                        align: "center",
+                        templet: "<span>{{realNameEcho(d.creator)}}</span>"
+                    }
+                    , {
+                        field: 'updator',
+                        title: '更新人',
+                        width: 120,
+                        align: "center",
+                        templet: "<span>{{realNameEcho(d.updator)}}</span>"
+                    }
                     , {field: 'menuOrder', title: '显示顺序', width: 120, align: "center"}
                     , {field: 'menuRemarks', title: '菜单备注', width: 150, align: "center"}
                     , {

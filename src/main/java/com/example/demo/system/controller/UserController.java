@@ -155,4 +155,18 @@ public class UserController {
         }
         return new Result().fail("");
     }
+
+    /**
+     * 通过创建人id或更新人id查询对应的姓名
+     *
+     * @return
+     */
+    @RequestMapping(value = "/getRealName", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> getRealName(String data) {
+
+        String dicName = userService.getRealName(data);
+
+        return new Result().success(dicName);
+    }
 }

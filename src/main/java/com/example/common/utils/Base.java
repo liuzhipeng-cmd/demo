@@ -44,17 +44,7 @@ public class Base implements Serializable {
     private String creator;
 
     /**
-     * 创建人名称
-     */
-    private String creatorName;
-
-    /**
      * 更新人id
      */
     private String updator;
-
-    /**
-     * 更新人名称
-     */
-    private String updatorName;
 }

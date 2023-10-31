@@ -24,3 +24,16 @@ function dataDictionaryEcho(data, type) {
     })
     return dicNameValue.responseJSON.data;
 }
+
+// 通过创建人id或更新人id查询对应的姓名
+function realNameEcho(data) {
+    var realName = $.ajax({
+        url: ctx + '/getRealName',
+        method: 'post',
+        async: false,
+        data: {
+            data: data
+        }
+    })
+    return realName.responseJSON.data;
+}

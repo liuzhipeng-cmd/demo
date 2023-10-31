@@ -146,9 +146,21 @@
                 , cols: [[ //表头
                     {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', align: "center"}
                     , {field: 'roleName', title: '角色名称', width: 120, align: "center"}
-                    , {field: 'creatorName', title: '创建人', width: 120, align: "center"}
+                    , {
+                        field: 'creator',
+                        title: '创建人',
+                        width: 120,
+                        align: "center",
+                        templet: "<span>{{realNameEcho(d.creator)}}</span>"
+                    }
                     , {field: 'createTime', title: '创建时间', width: 200, align: "center"}
-                    , {field: 'updatorName', title: '更新人', width: 200, align: "center"}
+                    , {
+                        field: 'updator',
+                        title: '更新人',
+                        width: 200,
+                        align: "center",
+                        templet: "<span>{{realNameEcho(d.updator)}}</span>"
+                    }
                     , {field: 'updateTime', title: '更新时间', width: 200, align: "center"}
                     , {field: 'remark', title: '备注', width: 200, align: "center"}
                     , {title: '操作', width: 200, align: 'center', toolbar: '#dataRoleBarDemo', fixed: 'right'}

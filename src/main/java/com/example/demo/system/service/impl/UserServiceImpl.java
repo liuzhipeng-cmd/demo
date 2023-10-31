@@ -166,6 +166,20 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 通过id查询对应的姓名
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public String getRealName(String id) {
+
+        String realName = userDao.getRealName(id);
+
+        return realName;
+    }
+
+    /**
      * 将角色id与用户id保存到用户与角色关联表
      *
      * @param pojo

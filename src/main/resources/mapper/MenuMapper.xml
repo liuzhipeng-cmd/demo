@@ -5,9 +5,8 @@
     <!--查询全部数据-->
     <select id="listMenuInfoPage" resultType="com.example.demo.system.pojo.MenuPojo">
         SELECT
-        m.id,m.menu_name,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator,u.real_name
-        AS creatorName,ui.real_name AS updatorName FROM sys_menu_info m LEFT JOIN sys_user_info u ON m.creator=u.id LEFT JOIN
-        sys_user_info ui ON m.updator=ui.id WHERE m.is_del=0 and m.pid is null
+        m.id,m.menu_name,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator
+        FROM sys_menu_info m WHERE m.is_del=0 and m.pid is null
         <if test="menuName != null and menuName != ''">
             and m.menu_name LIKE '%${menuName}%'
         </if>
@@ -20,7 +19,7 @@
     <!--插入数据-->
     <insert id="saveDataMenu" parameterType="com.example.demo.system.pojo.MenuPojo">
         INSERT INTO sys_menu_info(menu_name, menu_action, is_child_node, create_time, menu_order,
-                              menu_remarks, creator, pid)
+                                  menu_remarks, creator, pid)
         VALUES (#{menuName}, #{menuAction}, #{isChildNode}, #{createTime}, #{menuOrder},
                 #{menuRemarks}, #{creator}, #{pid})
     </insert>
@@ -54,9 +53,8 @@
     <!--子节点查询全部数据-->
     <select id="listMenuInfoChildPage" resultType="com.example.demo.system.pojo.MenuPojo">
         SELECT
-        m.id,m.menu_name,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator,u.real_name
-        AS creatorName,ui.real_name AS updatorName FROM sys_menu_info m LEFT JOIN sys_user_info u ON m.creator=u.id LEFT JOIN
-        sys_user_info ui ON m.updator=ui.id WHERE m.is_del=0 and m.pid = #{pid}
+        m.id,m.menu_name,m.menu_status,m.is_del,m.menu_action,m.is_child_node,m.create_time,m.update_time,m.menu_order,m.menu_remarks,m.creator,m.updator
+        FROM sys_menu_info m WHERE m.is_del=0 and m.pid = #{pid}
         <if test="menuName != null and menuName != ''">
             and m.menu_name LIKE '%${menuName}%'
         </if>

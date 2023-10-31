@@ -16,13 +16,8 @@
         s.updator,
         s.is_del,
         s.pid,
-        s.remarks,
-        u.real_name AS creatorName,
-        ui.real_name AS updatorName
-        FROM sys_dic s
-        LEFT JOIN sys_user_info u ON s.creator = u.id
-        LEFT JOIN sys_user_info ui ON s.updator = ui.id
-        WHERE s.is_del = 0 and s.pid is null
+        s.remarks
+        FROM sys_dic s WHERE s.is_del = 0 and s.pid is null
         <if test="dicType != null and dicType != ''">
             and s.dic_type LIKE '%${dicType}%'
         </if>
@@ -70,13 +65,8 @@
         s.updator,
         s.is_del,
         s.pid,
-        s.remarks,
-        u.real_name AS creatorName,
-        ui.real_name AS updatorName
-        FROM sys_dic s
-        LEFT JOIN sys_user_info u ON s.creator = u.id
-        LEFT JOIN sys_user_info ui ON s.updator = ui.id
-        WHERE s.is_del = 0 and s.pid = #{pid}
+        s.remarks
+        FROM sys_dic s WHERE s.is_del = 0 and s.pid = #{pid}
         <if test="dicName != null and dicName != ''">
             and s.dic_name LIKE '%${dicName}%'
         </if>

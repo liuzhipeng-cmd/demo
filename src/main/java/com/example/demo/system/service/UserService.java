@@ -64,4 +64,12 @@ public interface UserService {
      * @return
      */
     int updatePassword(String userName, String password);
+
+    /**
+     * 通过id查询对应的姓名
+     *
+     * @param id
+     * @return
+     */
+    String getRealName(String id);
 }

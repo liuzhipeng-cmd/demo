@@ -203,7 +203,13 @@
                     {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', align: "center"}
                     , {field: 'userName', title: '账号', width: 120, align: "center"}
                     , {field: 'realName', title: '真实姓名', width: 100, align: "center"}
-                    , {field: 'userGender', title: '性别', width: 80, align: "center",templet: "<span>{{dataDictionaryEcho(d.userGender,'GENDER_TYPE')}}</span>"}
+                    , {
+                        field: 'userGender',
+                        title: '性别',
+                        width: 80,
+                        align: "center",
+                        templet: "<span>{{dataDictionaryEcho(d.userGender,'GENDER_TYPE')}}</span>"
+                    }
                     , {field: 'userBirthday', title: '生日', width: 100, align: "center"}
                     , {field: 'userPhone', title: '手机号', width: 100, align: "center"}
                     , {field: 'roleName', title: '角色名称', width: 120, align: "center"}
@@ -257,7 +263,7 @@
                             var userGenderUpdate = $('#userGenderUpdate').val();
                             console.log(roleIdUpdate);
                             // 字段校验
-                            var validation = formValidation(userNameUpdate, realNameUpdate,userPhoneUpdate);
+                            var validation = formValidation(userNameUpdate, realNameUpdate, userPhoneUpdate);
                             if (!validation) {
                                 $.ajax({
                                     url: ctx + '/updateDataUser',
@@ -312,7 +318,7 @@
                 var roleIdSave = $('#roleIdSave').val();
                 var userGenderSave = $('#userGenderSave').val();
                 // 字段校验
-                var validation = formValidation(userNameSave, realNameSave,userPhoneSave);
+                var validation = formValidation(userNameSave, realNameSave, userPhoneSave);
                 if (!validation) {
                     $.ajax({
                         url: ctx + '/saveDataUser',
@@ -353,7 +359,7 @@
     }
 
     // 校验参数
-    function formValidation(userName, realName,userPhone) {
+    function formValidation(userName, realName, userPhone) {
         var flag = false;
         if (!userName) { // 账号
             flag = true;
@@ -366,7 +372,7 @@
             return flag;
         }
         if (userPhone) {
-            var phoneFlag =  verifyPhoneNumber(userPhone);
+            var phoneFlag = verifyPhoneNumber(userPhone);
             if (!phoneFlag) {
                 flag = true;
                 layer.alert("手机号格式不正确");
